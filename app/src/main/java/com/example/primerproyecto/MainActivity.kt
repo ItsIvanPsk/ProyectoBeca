@@ -1,46 +1,41 @@
 package com.example.primerproyecto
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.widget.Button
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE
+import com.example.primerproyecto.databinding.ActivityMainBinding
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var firstFragmentButton: MaterialButton
-    lateinit var secondFragmentButton: MaterialButton
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        firstFragmentButton = findViewById(com.example.primerproyecto.R.id.button_first_fragment)
-        secondFragmentButton = findViewById(com.example.primerproyecto.R.id.button_second_fragment)
-
-        changeFragment(R.id.fragmentContainer, FirstFragment())
+        changeFragment(R.id.fragmentContainer, FirstFragment(), "firstFragment")
         settupButtonListeners()
 
     }
 
-    fun changeFragment(idContainer: Int, fragment: Fragment){
-        var fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction
+    fun changeFragment(idContainer: Int, fragment: Fragment, backStack: String) {
+        supportFragmentManager
+            .beginTransaction()
             .replace(idContainer, fragment)
+            .addToBackStack(backStack)
+            .setTransition(TRANSIT_FRAGMENT_FADE)
             .commit()
     }
 
-    fun settupButtonListeners(){
-        firstFragmentButton.setOnClickListener {
-            changeFragment(R.id.fragmentContainer, FirstFragment())
+    fun settupButtonListeners() = with(binding) {
+        buttonFirstFragment.setOnClickListener {
+            changeFragment(R.id.fragmentContainer, FirstFragment(), "firstFragment")
         }
-        secondFragmentButton.setOnClickListener {
-            changeFragment(R.id.fragmentContainer, SecondFragment())
+        buttonSecondFragment.setOnClickListener {
+            changeFragment(R.id.fragmentContainer, SecondFragment(), "secondFragment")
         }
     }
 }
