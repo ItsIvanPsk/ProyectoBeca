@@ -28,4 +28,15 @@
         app:layout_constraintTop_toBottomOf="@+id/main_text_header"
         app:layout_constraintVertical_bias="0.201" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_fragment_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.example.primerproyecto.FirstFragment"
+        app:layout_constraintTop_toBottomOf="@+id/main_button_change"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
