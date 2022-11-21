@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.primerproyecto.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
 
     private lateinit var binding: FragmentSecondBinding
+    private val args : SecondFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +24,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         println(arguments?.getString("name"))
-        binding.textToRefresh.text = "Welcome, " + arguments?.getString("name");
+        binding.textToRefresh.text = "Welcome, " + args.username
         binding.goBackButton.setOnClickListener {
             goToFirstFragment()
         }
@@ -31,10 +33,6 @@ class SecondFragment : Fragment() {
 
     fun goToFirstFragment(){
         view?.findNavController()?.navigate(R.id.action_secondFragment_to_firstFragment)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
 }
