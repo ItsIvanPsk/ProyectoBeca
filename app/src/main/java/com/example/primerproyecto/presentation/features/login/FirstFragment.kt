@@ -33,9 +33,6 @@ class FirstFragment : Fragment() {
     fun setupListeners() = with(binding){
         goToButton.setOnClickListener {
             viewmodel.checkUsername(mainInput.text.toString())
-            if(viewmodel.usernameLiveData.value == false){
-                Toast.makeText(context, "User not found!", Toast.LENGTH_LONG).show()
-            }
         }
     }
 
@@ -45,9 +42,11 @@ class FirstFragment : Fragment() {
     }
 
     fun setupObservers(){
-        viewmodel.usernameLiveData.observe(viewLifecycleOwner, Observer {
+        viewmodel.getCheckLiveData().observe(viewLifecycleOwner, Observer {
            if (it){
                goToSecondFragment(binding.mainInput.text.toString())
+           } else{
+               Toast.makeText(context, "User not found!", Toast.LENGTH_LONG).show()
            }
         })
     }

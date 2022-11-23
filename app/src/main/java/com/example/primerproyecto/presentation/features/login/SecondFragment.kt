@@ -16,6 +16,7 @@ class SecondFragment : Fragment() {
 
     private lateinit var binding: FragmentSecondBinding
     private val args: SecondFragmentArgs by navArgs()
+    val viewmodel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setupListeners()
-        binding.textToRefresh.text = "Welcome, " + args.username
+        setupObservers()
         return binding.root
     }
 
@@ -42,6 +43,12 @@ class SecondFragment : Fragment() {
         }
     }
 
-
+    fun setupObservers() = with(viewmodel) {
+        getUsernameLiveData().observe(viewLifecycleOwner, Observer {
+            binding.textToRefresh.text = "Welcome, " + it
+            binding.textToRefresh.visibility = View.VISIBLE
+            binding.goBackButton.visibility = View.VISIBLE
+        })
+    }
 
 }
