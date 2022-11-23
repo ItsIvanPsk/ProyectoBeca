@@ -1,18 +1,21 @@
-package com.example.primerproyecto
+package com.example.primerproyecto.presentation.features.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
 
     private lateinit var binding: FragmentSecondBinding
-    private val args : SecondFragmentArgs by navArgs()
+    private val args: SecondFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +26,22 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        println(arguments?.getString("name"))
+        setupListeners()
         binding.textToRefresh.text = "Welcome, " + args.username
-        binding.goBackButton.setOnClickListener {
-            goToFirstFragment()
-        }
         return binding.root
     }
 
     fun goToFirstFragment(){
-        view?.findNavController()?.navigate(R.id.action_secondFragment_to_firstFragment)
+        val directions = SecondFragmentDirections.actionSecondFragmentToFirstFragment()
+        view?.findNavController()?.navigate(directions)
     }
+
+    fun setupListeners() = with(binding){
+        goBackButton.setOnClickListener {
+            goToFirstFragment()
+        }
+    }
+
+
 
 }
