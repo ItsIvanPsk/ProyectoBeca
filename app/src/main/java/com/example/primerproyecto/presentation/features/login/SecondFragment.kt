@@ -1,17 +1,20 @@
 package com.example.primerproyecto.presentation.features.login
 
+import android.R
+import android.icu.text.AlphabeticIndex.Record
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.FragmentSecondBinding
+
 
 class SecondFragment : Fragment() {
 
@@ -19,18 +22,51 @@ class SecondFragment : Fragment() {
     // private val args: SecondFragmentArgs by navArgs()
     private lateinit var viewmodel: LoginViewModel
 
+
+    var adapter: DataAdapter? = null
+
+    // Nombres
+    var names: ArrayList<String> = ArrayList()
+    // Apellidos
+    var surnames: ArrayList<String> = ArrayList()
+
+    var usernames: ArrayList<String> = ArrayList()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentSecondBinding.inflate(layoutInflater)
+
+        // data to populate the RecyclerView with
+        names.add("Nerea")
+        names.add("Paco")
+        names.add("Alberto")
+        names.add("Álvaro")
+        names.add("Xavi")
+        names.add("Aitor")
+
+        surnames.add("Lopez")
+        surnames.add("García")
+        surnames.add("Rosa")
+        surnames.add("De Miguel")
+        surnames.add("Fernandez")
+        surnames.add("Mena")
+
+        // set up the RecyclerView
+        val recyclerView: RecyclerView = binding.recyclerview
+        recyclerView.setLayoutManager(LinearLayoutManager(context));
+        adapter = DataAdapter(context, usernames)
+        recyclerView.adapter = adapter
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setupListeners()
         setupObservers()
-        viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         return binding.root
     }
 
@@ -43,6 +79,9 @@ class SecondFragment : Fragment() {
         goBackButton.setOnClickListener {
             goToFirstFragment()
         }
+        addMore.setOnClickListener {
+            addRecyclerViewContent()
+        }
     }
 
     fun setupObservers() = with(viewmodel) {
@@ -51,6 +90,16 @@ class SecondFragment : Fragment() {
             binding.textToRefresh.visibility = View.VISIBLE
             binding.goBackButton.visibility = View.VISIBLE
         })
+    }
+
+    fun addRecyclerViewContent(){
+        for (i in 0..4) {
+            val indexName = (Math.random() * names.size).toInt()
+            val indexSurname = (Math.random() * surnames.size).toInt()
+            usernames.add(names.get(indexName) + " " + surnames.get(indexSurname))
+        }
+        // notificar l'adapter dels canvis al model
+        adapter!!.notifyDataSetChanged()
     }
 
 }
