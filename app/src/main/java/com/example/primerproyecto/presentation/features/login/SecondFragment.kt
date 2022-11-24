@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
 
     private lateinit var binding: FragmentSecondBinding
-    private val args: SecondFragmentArgs by navArgs()
-    val viewmodel: LoginViewModel by viewModels()
+    // private val args: SecondFragmentArgs by navArgs()
+    private lateinit var viewmodel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class SecondFragment : Fragment() {
     ): View {
         setupListeners()
         setupObservers()
+        viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         return binding.root
     }
 
