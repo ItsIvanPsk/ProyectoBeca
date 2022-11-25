@@ -3,9 +3,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/nom"
+    <CheckBox
+        android:id="@+id/taskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp"/>
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/taskLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label"/>
+
 </LinearLayout>

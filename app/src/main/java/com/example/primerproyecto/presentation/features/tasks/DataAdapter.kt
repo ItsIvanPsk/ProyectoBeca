@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.features.login
+package com.example.primerproyecto.presentation.features.tasks
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.R
 
 
-class DataAdapter internal constructor(context: Context?, names: ArrayList<String>) :
+class DataAdapter internal constructor(context: Context?, tasks: Array<String>) :
     RecyclerView.Adapter<DataAdapter.ViewHolder>() {
-    private val nameList: ArrayList<String>
+    private val nameList: Array<String>
     private val mInflater: LayoutInflater
 
     init {
         mInflater = LayoutInflater.from(context)
-        nameList = names
+        nameList = tasks
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,7 +25,7 @@ class DataAdapter internal constructor(context: Context?, names: ArrayList<Strin
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val name: String = nameList.get(position)
+        val name: String = nameList[position]
         holder.nomView.text = name
     }
 
@@ -38,7 +38,7 @@ class DataAdapter internal constructor(context: Context?, names: ArrayList<Strin
         var nomView: TextView
 
         init {
-            nomView = itemView.findViewById(R.id.nom)
+            nomView = itemView.findViewById(R.id.taskLabel)
         }
     }
 }
