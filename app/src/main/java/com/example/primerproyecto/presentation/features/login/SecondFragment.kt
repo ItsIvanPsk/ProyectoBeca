@@ -46,9 +46,6 @@ class SecondFragment : Fragment() {
         goBackButton.setOnClickListener {
             goToFirstFragment()
         }
-        toolbar.toolbarBackArrow.setOnClickListener{
-            findNavController().popBackStack()
-        }
     }
 
     fun setupObservers() = with(viewmodel) {

@@ -53,9 +53,7 @@ class AddTaskFragment : Fragment() {
         addtaskButtonCreateTask.setOnClickListener {
             //TODO: create task functionality
         }
-        toolbar.toolbarBackArrow.setOnClickListener{
-            findNavController().popBackStack()
-        }
+
     }
 
     private fun goToTaskFragment(){

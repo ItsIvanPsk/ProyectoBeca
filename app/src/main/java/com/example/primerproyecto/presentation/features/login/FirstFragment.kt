@@ -26,7 +26,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding.toolbar.toolbarBackArrow.visibility = View.GONE
         setupListeners()
         setupObservers()
         return binding.root
@@ -45,9 +44,6 @@ class FirstFragment : Fragment() {
 
             goToTaskFragment()
 
-        }
-        toolbar.toolbarBackArrow.setOnClickListener{
-            println("hey")
         }
     }
 

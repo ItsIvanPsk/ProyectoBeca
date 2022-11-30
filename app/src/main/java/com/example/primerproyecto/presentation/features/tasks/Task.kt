@@ -5,9 +5,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "task")
 data class Task(
-    @PrimaryKey val taskId : Int,
+    @PrimaryKey(autoGenerate = true) val taskId : Int,
     @NonNull @ColumnInfo val taskName : String,
     @NonNull @ColumnInfo val taskDescription : String,
     @NonNull @ColumnInfo val image : Boolean

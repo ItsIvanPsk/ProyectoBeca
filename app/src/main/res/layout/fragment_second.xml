@@ -8,8 +8,6 @@
     android:layout_gravity="center_horizontal"
     tools:context=".presentation.features.login.SecondFragment">
 
-    <include android:id="@+id/toolbar" layout="@layout/custom_toolbar"/>
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_to_refresh"
         android:layout_width="wrap_content"

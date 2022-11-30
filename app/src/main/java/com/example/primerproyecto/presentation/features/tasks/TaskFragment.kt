@@ -44,9 +44,6 @@ class TaskFragment : Fragment() {
         taskAddTask.setOnClickListener{
             goToTaskAddFragment()
         }
-        toolbar.toolbarBackArrow.setOnClickListener{
-            findNavController().popBackStack()
-        }
     }
 
     fun setupAdapter(tasks : List<Task>){
@@ -67,12 +64,10 @@ class TaskFragment : Fragment() {
         findNavController().navigate(directions)
     }
 
-
     fun setupObservers(){
         viewmodel.getTaskLiveData().observe(viewLifecycleOwner) {
             println(it.size)
             setupAdapter(it)
         }
     }
-
 }
