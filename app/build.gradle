@@ -2,16 +2,23 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+}
+
+ext {
+    kotlin_version = "1.6.20"
+    nav_version = "2.4.1"
+    room_version = '2.4.2'
 }
 
 android {
     namespace 'com.example.primerproyecto'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.primerproyecto"
-        minSdk 21
-        targetSdk 32
+        minSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -53,5 +60,15 @@ dependencies {
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    // Coil - Image Lib
+    implementation("io.coil-kt:coil:2.2.2")
+
+    // Room - DB Lib
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 
 }

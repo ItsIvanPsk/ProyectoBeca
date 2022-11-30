@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.FragmentSecondBinding
@@ -44,6 +45,9 @@ class SecondFragment : Fragment() {
     fun setupListeners() = with(binding){
         goBackButton.setOnClickListener {
             goToFirstFragment()
+        }
+        toolbar.toolbarBackArrow.setOnClickListener{
+            findNavController().popBackStack()
         }
     }
 

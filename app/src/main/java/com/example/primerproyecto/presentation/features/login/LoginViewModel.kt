@@ -3,15 +3,15 @@ package com.example.primerproyecto.presentation.features.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.primerproyecto.presentation.features.tasks.Task
 
 class LoginViewModel : ViewModel(){
 
-    val userList = listOf("Juanito", "Lupito")
-    var taskList = arrayOf("Dev android", "Dev Unity", "Dev Kotlin")
+    private val userList = listOf("Juanito", "Lupito")
 
     private val usernameLiveData = MutableLiveData<String>()
     private val checkUserLiveData = MutableLiveData<Boolean>()
-    private val taskLiveData = MutableLiveData<Array<String>>()
+    private val taskLiveData = MutableLiveData<List<Task>>()
 
     fun getUsernameLiveData() : LiveData<String> {
         return usernameLiveData
@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel(){
         return checkUserLiveData
     }
 
-    fun getTaskLiveData() : LiveData<Array<String>> {
+    fun getTaskLiveData() : LiveData<List<Task>> {
         return taskLiveData
     }
 
@@ -31,7 +31,10 @@ class LoginViewModel : ViewModel(){
         println(usernameLiveData.value)
     }
 
-    fun addTask(task : String) {
-        taskList.set(taskList.size - 1, task)
+    fun addTask(task : Task) {
+        val tasks = taskLiveData.value.orEmpty().toMutableList().apply {
+            add(task)
+        }
+        taskLiveData.value = tasks
     }
 }

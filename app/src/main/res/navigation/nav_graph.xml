@@ -39,15 +39,30 @@
             android:defaultValue="anonimo"/>
 
     </fragment>
+
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.example.primerproyecto.presentation.features.login.TaskFragment"
+        android:name="com.example.primerproyecto.presentation.features.tasks.TaskFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_task">
 
         <action
             android:id="@+id/action_taskFragment_to_firstFragment"
             app:destination="@id/firstFragment">
+        </action>
+        <action
+            android:id="@+id/action_taskFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.primerproyecto.presentation.features.tasks.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_addTaskFragment_to_taskFragment"
+            app:destination="@id/taskFragment">
         </action>
     </fragment>
 

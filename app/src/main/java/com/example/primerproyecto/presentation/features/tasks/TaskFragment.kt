@@ -1,34 +1,30 @@
-package com.example.primerproyecto.presentation.features.login
+package com.example.primerproyecto.presentation.features.tasks
 
-import android.app.appsearch.StorageInfo
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.primerproyecto.databinding.FragmentFirstBinding
+import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentTaskBinding
-import com.example.primerproyecto.presentation.features.tasks.DataAdapter
+import com.example.primerproyecto.presentation.MainActivity
+import com.example.primerproyecto.presentation.features.login.LoginViewModel
 
 class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
     private val viewmodel: LoginViewModel by activityViewModels()
 
-    var adapter: DataAdapter? = null
-
-    var tasks = arrayOf("Dev android")
+    private var tasks = listOf<Task>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentTaskBinding.inflate(layoutInflater)
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateView(
@@ -38,7 +34,6 @@ class TaskFragment : Fragment() {
         setupListeners()
         setupObservers()
         setupAdapter(tasks)
-        viewmodel.addTask("Devosi")
         return binding.root
     }
 
@@ -46,19 +41,32 @@ class TaskFragment : Fragment() {
         taskGoBack.setOnClickListener {
             goToFirstFragment()
         }
+        taskAddTask.setOnClickListener{
+            goToTaskAddFragment()
+        }
+        toolbar.toolbarBackArrow.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
-    fun setupAdapter(tasks : Array<String>){
-        val recyclerView: RecyclerView = binding.recyclerview
+    fun setupAdapter(tasks : List<Task>){
+        var adapter = DataAdapter()
+        val recyclerView: RecyclerView = binding.taskRecycler
         recyclerView.setLayoutManager(LinearLayoutManager(context));
-        adapter = DataAdapter(context, tasks)
+        adapter.tasks = tasks
         recyclerView.adapter = adapter
     }
 
     fun goToFirstFragment(){
         val directions = TaskFragmentDirections.actionTaskFragmentToFirstFragment()
-        view?.findNavController()?.navigate(directions)
+        findNavController().navigate(directions)
     }
+
+    fun goToTaskAddFragment(){
+        val directions = TaskFragmentDirections.actionTaskFragmentToAddTaskFragment()
+        findNavController().navigate(directions)
+    }
+
 
     fun setupObservers(){
         viewmodel.getTaskLiveData().observe(viewLifecycleOwner) {
@@ -66,4 +74,5 @@ class TaskFragment : Fragment() {
             setupAdapter(it)
         }
     }
+
 }

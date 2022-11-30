@@ -8,6 +8,8 @@
     android:layout_gravity="center_horizontal"
     tools:context=".presentation.features.login.SecondFragment">
 
+    <include android:id="@+id/toolbar" layout="@layout/custom_toolbar"/>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_to_refresh"
         android:layout_width="wrap_content"
@@ -31,11 +33,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:text="Add More" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

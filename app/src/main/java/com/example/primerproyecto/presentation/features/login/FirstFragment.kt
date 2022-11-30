@@ -10,15 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.primerproyecto.databinding.FragmentFirstBinding
+import com.example.primerproyecto.presentation.features.tasks.Task
 
 class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
     private val viewmodel: LoginViewModel by activityViewModels()
-
-    fun getViewModel() : LoginViewModel{
-        return viewmodel
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +26,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding.toolbar.toolbarBackArrow.visibility = View.GONE
         setupListeners()
         setupObservers()
         return binding.root
@@ -39,11 +37,17 @@ class FirstFragment : Fragment() {
             viewmodel.checkUsername(mainInput.text.toString())
         }
         goTaskButton.setOnClickListener {
-            viewmodel.addTask("DevDev")
-            viewmodel.addTask("NoDev")
-            viewmodel.addTask("ThisIsDev")
-            viewmodel.addTask("DevOS")
+            viewmodel.addTask(Task(0, "Dev1", "Develop something", true))
+            viewmodel.addTask(Task(1, "Dev2", "Develop something", false))
+            viewmodel.addTask(Task(2, "Dev3", "Develop something", true))
+            viewmodel.addTask(Task(3, "Dev4", "Develop something", true))
+            viewmodel.addTask(Task(4, "Dev5", "Develop something", false))
+
             goToTaskFragment()
+
+        }
+        toolbar.toolbarBackArrow.setOnClickListener{
+            println("hey")
         }
     }
 
