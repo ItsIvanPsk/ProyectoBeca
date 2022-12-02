@@ -9,10 +9,10 @@ import androidx.room.Query
 @Dao
 interface TaskDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addTask(task: Task)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addTask(task: TaskEntity)
 
-    @Query("SELECT * FROM task ORDER BY taskId ASC")
-    fun readAllData() : LiveData<List<Task>>
+    @Query("SELECT * FROM TaskEntity ORDER BY taskId ASC")
+    fun readAllData() : LiveData<List<TaskEntity>>
 
 }

@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.primerproyecto.databinding.FragmentFirstBinding
-import com.example.primerproyecto.presentation.features.tasks.Task
+import com.example.primerproyecto.presentation.features.tasks.TaskEntity
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 class FirstFragment : Fragment() {
 
@@ -36,14 +37,7 @@ class FirstFragment : Fragment() {
             viewmodel.checkUsername(mainInput.text.toString())
         }
         goTaskButton.setOnClickListener {
-            viewmodel.addTask(Task(0, "Dev1", "Develop something", true))
-            viewmodel.addTask(Task(1, "Dev2", "Develop something", false))
-            viewmodel.addTask(Task(2, "Dev3", "Develop something", true))
-            viewmodel.addTask(Task(3, "Dev4", "Develop something", true))
-            viewmodel.addTask(Task(4, "Dev5", "Develop something", false))
-
             goToTaskFragment()
-
         }
     }
 
@@ -59,9 +53,9 @@ class FirstFragment : Fragment() {
 
     fun setupObservers(){
         viewmodel.getCheckLiveData().observe(viewLifecycleOwner) {
-            if (it) {
+            if (it && it != null) {
                 goToSecondFragment(binding.mainInput.text.toString())
-            } else {
+            } else if (it){
                 Toast.makeText(context, "User not found!", Toast.LENGTH_LONG).show()
             }
         }

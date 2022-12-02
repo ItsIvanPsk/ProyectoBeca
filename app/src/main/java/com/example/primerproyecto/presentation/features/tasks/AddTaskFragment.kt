@@ -1,30 +1,25 @@
 package com.example.primerproyecto.presentation.features.tasks
 
 import android.os.Bundle
-import android.view.*
-import androidx.activity.OnBackPressedCallback
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
-import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentAddTaskBinding
 import com.example.primerproyecto.presentation.MainActivity
-import com.example.primerproyecto.presentation.features.login.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddTaskFragment : Fragment() {
+@AndroidEntryPoint
+class AddTaskFragment(): Fragment() {
     private lateinit var binding: FragmentAddTaskBinding
-    private val viewmodel: LoginViewModel by activityViewModels()
-
-    fun getViewModel() : LoginViewModel {
-        return viewmodel
-    }
+    private val viewmodel: TaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentAddTaskBinding.inflate(layoutInflater)
-        //(requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // add back arrow to toolbar
         if ((requireActivity() as MainActivity).supportActionBar != null){
             (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true);
@@ -51,9 +46,11 @@ class AddTaskFragment : Fragment() {
             goToTaskFragment()
         }
         addtaskButtonCreateTask.setOnClickListener {
-            //TODO: create task functionality
+            var taskName = binding.addtaskInputTaskName.text.toString()
+            var taskImage = binding.addtaskCheckboxShowImage.isChecked
+            viewmodel.addTask(TaskEntity(taskName = taskName, image = taskImage))
+            goToTaskFragment()
         }
-
     }
 
     private fun goToTaskFragment(){

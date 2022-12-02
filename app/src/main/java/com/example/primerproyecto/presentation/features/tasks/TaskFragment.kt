@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentTaskBinding
 import com.example.primerproyecto.presentation.MainActivity
 import com.example.primerproyecto.presentation.features.login.LoginViewModel
@@ -17,9 +15,9 @@ import com.example.primerproyecto.presentation.features.login.LoginViewModel
 class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
-    private val viewmodel: LoginViewModel by activityViewModels()
+    private val viewmodel: TaskViewModel by activityViewModels()
 
-    private var tasks = listOf<Task>()
+    private var tasks = listOf<TaskEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +44,7 @@ class TaskFragment : Fragment() {
         }
     }
 
-    fun setupAdapter(tasks : List<Task>){
+    fun setupAdapter(tasks : List<TaskEntity>){
         var adapter = DataAdapter()
         val recyclerView: RecyclerView = binding.taskRecycler
         recyclerView.setLayoutManager(LinearLayoutManager(context));
@@ -64,9 +62,8 @@ class TaskFragment : Fragment() {
         findNavController().navigate(directions)
     }
 
-    fun setupObservers(){
-        viewmodel.getTaskLiveData().observe(viewLifecycleOwner) {
-            println(it.size)
+    fun setupObservers() = with(viewmodel){
+        getTasks().observe(viewLifecycleOwner){
             setupAdapter(it)
         }
     }

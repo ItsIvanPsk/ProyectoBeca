@@ -2,7 +2,6 @@ package com.example.primerproyecto.presentation.features.tasks
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,18 +10,18 @@ import coil.transform.CircleCropTransformation
 import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.ListItemBinding
 
-object TaskDiffCallBack : DiffUtil.ItemCallback<Task>() {
-    override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+object TaskDiffCallBack : DiffUtil.ItemCallback<TaskEntity>() {
+    override fun areItemsTheSame(oldItem: TaskEntity, newItem: TaskEntity): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+    override fun areContentsTheSame(oldItem: TaskEntity, newItem: TaskEntity): Boolean {
         return oldItem == newItem
     }
 }
 
-class DataAdapter() : ListAdapter<Task, DataAdapter.TaskViewHolder>(TaskDiffCallBack) {
-    var tasks = listOf<Task>()
+class DataAdapter() : ListAdapter<TaskEntity, DataAdapter.TaskViewHolder>(TaskDiffCallBack) {
+    var tasks = listOf<TaskEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,7 +29,7 @@ class DataAdapter() : ListAdapter<Task, DataAdapter.TaskViewHolder>(TaskDiffCall
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val task: Task = tasks[position]
+        val task: TaskEntity = tasks[position]
         holder.bind(task, position)
     }
 
@@ -40,7 +39,7 @@ class DataAdapter() : ListAdapter<Task, DataAdapter.TaskViewHolder>(TaskDiffCall
 
     inner class TaskViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : Task, position : Int){
+        fun bind(item : TaskEntity, position : Int){
             binding.taskLabel.text = item.taskName
 
             if(item.image){

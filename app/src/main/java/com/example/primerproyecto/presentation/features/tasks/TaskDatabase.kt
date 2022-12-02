@@ -1,13 +1,11 @@
-package com.example.primerproyecto
+package com.example.primerproyecto.presentation.features.tasks
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.primerproyecto.presentation.features.tasks.Task
-import com.example.primerproyecto.presentation.features.tasks.TaskDao
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [TaskEntity::class], version = 1, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
@@ -27,7 +25,7 @@ abstract class TaskDatabase : RoomDatabase() {
                     context.applicationContext,
                     TaskDatabase::class.java,
                     "task_database"
-                ).build()
+                ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return INSTANCE as TaskDatabase
             }

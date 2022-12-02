@@ -3,7 +3,7 @@ package com.example.primerproyecto.presentation.features.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.primerproyecto.presentation.features.tasks.Task
+import com.example.primerproyecto.presentation.features.tasks.TaskEntity
 
 class LoginViewModel : ViewModel(){
 
@@ -11,7 +11,7 @@ class LoginViewModel : ViewModel(){
 
     private val usernameLiveData = MutableLiveData<String>()
     private val checkUserLiveData = MutableLiveData<Boolean>()
-    private val taskLiveData = MutableLiveData<List<Task>>()
+    private val taskLiveData = MutableLiveData<List<TaskEntity>>()
 
     fun getUsernameLiveData() : LiveData<String> {
         return usernameLiveData
@@ -21,17 +21,13 @@ class LoginViewModel : ViewModel(){
         return checkUserLiveData
     }
 
-    fun getTaskLiveData() : LiveData<List<Task>> {
-        return taskLiveData
-    }
-
     fun checkUsername(username : String){
         checkUserLiveData.value = userList.contains(username)
         usernameLiveData.value = username
         println(usernameLiveData.value)
     }
 
-    fun addTask(task : Task) {
+    fun addTask(task : TaskEntity) {
         val tasks = taskLiveData.value.orEmpty().toMutableList().apply {
             add(task)
         }

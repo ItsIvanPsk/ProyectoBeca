@@ -12,10 +12,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -26,6 +25,7 @@
             app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addtask_input_task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -34,6 +34,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/addtask_checkbox_show_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/show_image"
