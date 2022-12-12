@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.FragmentSecondBinding
+import com.example.primerproyecto.presentation.features.tasks.DataAdapter
+
 
 class SecondFragment : Fragment() {
 
@@ -22,15 +24,16 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentSecondBinding.inflate(layoutInflater)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setupListeners()
         setupObservers()
-        viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         return binding.root
     }
 
@@ -52,5 +55,4 @@ class SecondFragment : Fragment() {
             binding.goBackButton.visibility = View.VISIBLE
         })
     }
-
 }

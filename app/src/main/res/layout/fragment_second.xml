@@ -24,4 +24,13 @@
         android:layout_gravity="center_horizontal"
         android:text="Go back"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="Add More" />
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>

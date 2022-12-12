@@ -4,24 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".presentation.features.login.FirstFragment">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/main_input"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:hint="Type something" />
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="70dp"
+        android:hint="@string/task"
+        app:boxStrokeColor="@color/design_default_color_primary"
+        app:boxStrokeWidth="2dp"
+        app:helperTextEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/main_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
-        android:text="Go next"/>
+        android:layout_marginTop="130dp"
+        android:text="Go next" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/go_task_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="175dp"
+        android:text="Go tasks" />
 
 </FrameLayout>
