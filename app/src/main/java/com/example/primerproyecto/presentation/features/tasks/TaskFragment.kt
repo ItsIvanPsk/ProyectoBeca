@@ -1,16 +1,20 @@
 package com.example.primerproyecto.presentation.features.tasks
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.sqlite.db.SupportSQLiteCompat.Api16Impl.cancel
+import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentTaskBinding
 import com.example.primerproyecto.presentation.MainActivity
-import com.example.primerproyecto.presentation.features.login.LoginViewModel
 
 class TaskFragment : Fragment() {
 
@@ -45,11 +49,16 @@ class TaskFragment : Fragment() {
     }
 
     fun setupAdapter(tasks : List<TaskEntity>){
-        var adapter = DataAdapter()
+        var adapter = DataAdapter(this)
         val recyclerView: RecyclerView = binding.taskRecycler
-        recyclerView.setLayoutManager(LinearLayoutManager(context));
         adapter.tasks = tasks
         recyclerView.adapter = adapter
+    }
+
+    fun goToEditTask(task : TaskEntity){
+        viewmodel.setTaskToEdit(task)
+        val directions = TaskFragmentDirections.actionTaskFragmentToEditTaskFragment()
+        findNavController().navigate(directions)
     }
 
     fun goToFirstFragment(){
@@ -66,5 +75,23 @@ class TaskFragment : Fragment() {
         getTasks().observe(viewLifecycleOwner){
             setupAdapter(it)
         }
+    }
+
+    fun showEditDialog(task: TaskEntity) = with(binding){
+        val builder = AlertDialog.Builder(context)
+        val inflater = requireActivity().layoutInflater
+        builder.setTitle("Edit Task")
+        builder.setView(inflater.inflate(R.layout.edit_task_dialog, null))
+            .setPositiveButton("Save") { dialog, id ->
+                viewmodel.upadateTask(task)
+            }
+            .setNeutralButton("Delete") { dialog, id ->
+                viewmodel.deleteTask(task)
+            }
+            .setNegativeButton("") { dialog, id ->
+                dialog.dismiss()
+            }
+        builder.create()
+        builder.show()
     }
 }

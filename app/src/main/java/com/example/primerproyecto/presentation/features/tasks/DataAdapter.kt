@@ -20,34 +20,37 @@ object TaskDiffCallBack : DiffUtil.ItemCallback<TaskEntity>() {
     }
 }
 
-class DataAdapter() : ListAdapter<TaskEntity, DataAdapter.TaskViewHolder>(TaskDiffCallBack) {
+class DataAdapter(private var fragment : TaskFragment) : ListAdapter<TaskEntity, DataAdapter.TaskViewHolder>(TaskDiffCallBack) {
     var tasks = listOf<TaskEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TaskViewHolder(binding)
+        return TaskViewHolder(binding, fragment)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task: TaskEntity = tasks[position]
-        holder.bind(task, position)
+        holder.bind(task, position, fragment)
     }
 
     override fun getItemCount(): Int {
         return tasks.size
     }
 
-    inner class TaskViewHolder(private val binding: ListItemBinding) :
+    inner class TaskViewHolder(private val binding: ListItemBinding, fragment : TaskFragment) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : TaskEntity, position : Int){
+        fun bind(item : TaskEntity, position : Int, fragment: TaskFragment){
             binding.taskLabel.text = item.taskName
-
             if(item.image){
                 binding.taskImage.load("https://picsum.photos/id/$position/50/50") {
                     crossfade(true)
                     placeholder(R.drawable.ic_baseline_person_24)
                     transformations(CircleCropTransformation())
                 }
+            }
+
+            binding.taskBackground.setOnClickListener {
+                fragment.showEditDialog(item)
             }
         }
     }

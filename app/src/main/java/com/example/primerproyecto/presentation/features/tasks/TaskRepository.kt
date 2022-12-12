@@ -11,4 +11,18 @@ class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
         taskDao.addTask(task)
     }
 
+    fun deleteTask(task: TaskEntity) {
+        taskDao.deleteTask(task.taskId)
+    }
+
+    fun updateTask(task: TaskEntity) {
+        taskDao.updateTask(task.taskId, task.taskName, task.image)
+        println("After repo")
+    }
+
+    suspend fun updateTask2(task: TaskEntity) {
+        taskDao.update(task)
+        println("After repo")
+    }
+
 }

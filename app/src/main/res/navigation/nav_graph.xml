@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_taskFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
     </fragment>
 
     <fragment
@@ -64,6 +67,17 @@
             android:id="@+id/action_addTaskFragment_to_taskFragment"
             app:destination="@id/taskFragment">
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.example.primerproyecto.EditTaskFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" >
+        <action
+            android:id="@+id/action_editTaskFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+
     </fragment>
 
 </navigation>
