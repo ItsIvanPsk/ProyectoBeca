@@ -12,4 +12,9 @@
     <string name="show_image">Show Image</string>
     <string name="task">Task</string>
     <string name="task_name">Task name</string>
+    <string name="go_tasks">Go tasks</string>
+    <string name="pokemon_api">Pokemon API</string>
+    <string name="go_next">Go next</string>
+    <string name="login_task"><![CDATA[Login & Task]]></string>
+    <string name="go_pokemon">Go Pokemon</string>
 </resources>
