@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.primerproyecto.databinding.FragmentAddTaskBinding
-import com.example.primerproyecto.presentation.MainActivity
+import com.example.primerproyecto.MainActivity
+import com.example.primerproyecto.features.tasks.TaskEntity
+import com.example.primerproyecto.features.tasks.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +43,7 @@ class AddTaskFragment(): Fragment() {
         return binding.root
     }
 
-    fun setupListeners() = with(binding){
+    private fun setupListeners() = with(binding){
         addtaskButtonGoBack.setOnClickListener {
             goToTaskFragment()
         }
@@ -58,6 +60,6 @@ class AddTaskFragment(): Fragment() {
         findNavController().navigate(directions)
     }
 
-    fun setupObservers(){ }
+    private fun setupObservers(){ }
 
 }

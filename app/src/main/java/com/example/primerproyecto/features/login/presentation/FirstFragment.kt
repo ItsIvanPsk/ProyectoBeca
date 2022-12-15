@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.features.login
+package com.example.primerproyecto.features.login.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.primerproyecto.databinding.FragmentFirstBinding
-import com.example.primerproyecto.presentation.features.tasks.TaskEntity
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 class FirstFragment : Fragment() {
 

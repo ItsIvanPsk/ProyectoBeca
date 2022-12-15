@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.features.login
+package com.example.primerproyecto.features.login.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.FragmentSecondBinding
-import com.example.primerproyecto.presentation.features.tasks.DataAdapter
 
 
 class SecondFragment : Fragment() {

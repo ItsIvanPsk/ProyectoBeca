@@ -1,9 +1,11 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.primerproyecto.features.tasks.TaskEntity
+import com.example.primerproyecto.features.tasks.domain.TaskDao
 
 @Database(entities = [TaskEntity::class], version = 1, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {

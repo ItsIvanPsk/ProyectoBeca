@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    tools:context=".presentation.features.login.SecondFragment">
+    tools:context=".features.login.presentation.SecondFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_to_refresh"

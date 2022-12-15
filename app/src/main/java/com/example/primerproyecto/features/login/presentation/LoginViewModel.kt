@@ -1,9 +1,9 @@
-package com.example.primerproyecto.presentation.features.login
+package com.example.primerproyecto.features.login.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.primerproyecto.presentation.features.tasks.TaskEntity
+import com.example.primerproyecto.features.tasks.TaskEntity
 
 class LoginViewModel : ViewModel(){
 

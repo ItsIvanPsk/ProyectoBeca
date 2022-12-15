@@ -1,9 +1,10 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.primerproyecto.features.tasks.domain.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +20,7 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository) 
         }
     }
 
-    fun setTaskToEdit(task:TaskEntity){
+    fun setTaskToEdit(task: TaskEntity){
         taskToEdit.value = task
     }
 
@@ -35,9 +36,9 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository) 
         repository.deleteTask(task)
     }
 
-    fun upadateTask(task: TaskEntity) {
+    fun updateTask(task: TaskEntity) {
         viewModelScope.launch {
-            repository.updateTask2(task)
+            repository.updateTask(task)
         }
     }
 

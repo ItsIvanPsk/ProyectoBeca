@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.ListItemBinding
+import com.example.primerproyecto.features.tasks.TaskEntity
 
 object TaskDiffCallBack : DiffUtil.ItemCallback<TaskEntity>() {
     override fun areItemsTheSame(oldItem: TaskEntity, newItem: TaskEntity): Boolean {
@@ -20,7 +21,8 @@ object TaskDiffCallBack : DiffUtil.ItemCallback<TaskEntity>() {
     }
 }
 
-class DataAdapter(private var fragment : TaskFragment) : ListAdapter<TaskEntity, DataAdapter.TaskViewHolder>(TaskDiffCallBack) {
+class DataAdapter(private var fragment : TaskFragment) : ListAdapter<TaskEntity, DataAdapter.TaskViewHolder>(
+    TaskDiffCallBack) {
     var tasks = listOf<TaskEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

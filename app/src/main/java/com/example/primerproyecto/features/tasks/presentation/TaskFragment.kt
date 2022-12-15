@@ -1,20 +1,30 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.presentation
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.sqlite.db.SupportSQLiteCompat.Api16Impl.cancel
 import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentTaskBinding
-import com.example.primerproyecto.presentation.MainActivity
+import com.example.primerproyecto.MainActivity
+import com.example.primerproyecto.features.tasks.TaskEntity
+import com.example.primerproyecto.features.tasks.TaskViewModel
+import com.example.primerproyecto.features.tasks.data.APIService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class TaskFragment : Fragment() {
 
@@ -39,7 +49,7 @@ class TaskFragment : Fragment() {
         return binding.root
     }
 
-    fun setupListeners() = with(binding){
+    private fun setupListeners() = with(binding){
         taskGoBack.setOnClickListener {
             goToFirstFragment()
         }
@@ -48,42 +58,56 @@ class TaskFragment : Fragment() {
         }
     }
 
-    fun setupAdapter(tasks : List<TaskEntity>){
+    private fun setupAdapter(tasks : List<TaskEntity>){
         var adapter = DataAdapter(this)
         val recyclerView: RecyclerView = binding.taskRecycler
         adapter.tasks = tasks
         recyclerView.adapter = adapter
     }
 
-    fun goToEditTask(task : TaskEntity){
-        viewmodel.setTaskToEdit(task)
-        val directions = TaskFragmentDirections.actionTaskFragmentToEditTaskFragment()
-        findNavController().navigate(directions)
-    }
-
-    fun goToFirstFragment(){
+    private fun goToFirstFragment(){
         val directions = TaskFragmentDirections.actionTaskFragmentToFirstFragment()
         findNavController().navigate(directions)
     }
 
-    fun goToTaskAddFragment(){
+    private fun goToTaskAddFragment(){
         val directions = TaskFragmentDirections.actionTaskFragmentToAddTaskFragment()
         findNavController().navigate(directions)
     }
 
-    fun setupObservers() = with(viewmodel){
+    private fun setupObservers() = with(viewmodel){
         getTasks().observe(viewLifecycleOwner){
             setupAdapter(it)
         }
     }
 
-    fun showEditDialog(task: TaskEntity) = with(binding){
+    private fun getRetrofit() : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://dog.ceo/api/breed/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun showEditDialog(task: TaskEntity) : AlertDialog = with(binding){
         val builder = AlertDialog.Builder(context)
-        val inflater = requireActivity().layoutInflater
         builder.setTitle("Edit Task")
-        builder.setView(inflater.inflate(R.layout.edit_task_dialog, null))
+
+        val layout = LinearLayout(context)
+        val taskNameInput = EditText(context)
+        val imageCheckBox = CheckBox(context)
+
+        taskNameInput.setText(task.taskName)
+        imageCheckBox.isChecked = task.image
+        layout.orientation = LinearLayout.VERTICAL
+        layout.addView(taskNameInput)
+        layout.addView(imageCheckBox)
+
+
+        builder.setView(layout)
             .setPositiveButton("Save") { dialog, id ->
-                viewmodel.upadateTask(task)
+                task.taskName = taskNameInput.text.toString()
+                task.image = imageCheckBox.isChecked
+                viewmodel.updateTask(task)
             }
             .setNeutralButton("Delete") { dialog, id ->
                 viewmodel.deleteTask(task)
@@ -91,6 +115,7 @@ class TaskFragment : Fragment() {
             .setNegativeButton("") { dialog, id ->
                 dialog.dismiss()
             }
+
         builder.create()
         builder.show()
     }

@@ -1,7 +1,8 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.domain
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.primerproyecto.features.tasks.TaskEntity
 
 
 @Dao

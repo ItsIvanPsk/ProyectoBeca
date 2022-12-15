@@ -1,6 +1,7 @@
-package com.example.primerproyecto.presentation.features.tasks
+package com.example.primerproyecto.features.tasks.domain
 
 import androidx.lifecycle.LiveData
+import com.example.primerproyecto.features.tasks.TaskEntity
 import javax.inject.Inject
 
 class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
@@ -15,14 +16,8 @@ class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
         taskDao.deleteTask(task.taskId)
     }
 
-    fun updateTask(task: TaskEntity) {
-        taskDao.updateTask(task.taskId, task.taskName, task.image)
-        println("After repo")
-    }
-
-    suspend fun updateTask2(task: TaskEntity) {
+    suspend fun updateTask(task: TaskEntity) {
         taskDao.update(task)
-        println("After repo")
     }
 
 }

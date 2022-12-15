@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.primerproyecto.presentation.features.login.FirstFragment"
+        android:name="com.example.primerproyecto.features.login.presentation.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" >
 
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.primerproyecto.presentation.features.login.SecondFragment"
+        android:name="com.example.primerproyecto.features.login.presentation.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" >
 
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.example.primerproyecto.presentation.features.tasks.TaskFragment"
+        android:name="com.example.primerproyecto.features.tasks.presentation.TaskFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_task">
 
@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.example.primerproyecto.presentation.features.tasks.AddTaskFragment"
+        android:name="com.example.primerproyecto.features.tasks.presentation.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task">
         <action
