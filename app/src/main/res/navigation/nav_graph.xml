@@ -3,81 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/main_menu">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.primerproyecto.features.login.presentation.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        android:id="@+id/main_menu"
+        android:name="com.example.primerproyecto.presentation.main_menu.MainMenu"
+        android:label="main_menu"
+        tools:layout="@layout/fragment_main_menu" >
 
         <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment">
-        </action>
+            android:id="@+id/action_main_menu_to_pokemon_graph"
+            app:destination="@id/pokemon_graph" />
         <action
-            android:id="@+id/action_firstFragment_to_taskFragment"
-            app:destination="@id/taskFragment">
-        </action>
+            android:id="@+id/action_main_menu_to_task_graph"
+            app:destination="@id/task_graph" />
+        <action
+            android:id="@+id/action_main_menu_to_login_graph"
+            app:destination="@id/login_graph" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.primerproyecto.features.login.presentation.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
-
-        <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment">
-        </action>
-
-        <argument
-            android:name="username"
-            app:argType="string"
-            android:defaultValue="anonimo"/>
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/taskFragment"
-        android:name="com.example.primerproyecto.features.tasks.presentation.TaskFragment"
-        android:label="fragment_task"
-        tools:layout="@layout/fragment_task">
-
-        <action
-            android:id="@+id/action_taskFragment_to_firstFragment"
-            app:destination="@id/firstFragment">
-        </action>
-        <action
-            android:id="@+id/action_taskFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
-        <action
-            android:id="@+id/action_taskFragment_to_editTaskFragment"
-            app:destination="@id/editTaskFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addTaskFragment"
-        android:name="com.example.primerproyecto.features.tasks.presentation.AddTaskFragment"
-        android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task">
-        <action
-            android:id="@+id/action_addTaskFragment_to_taskFragment"
-            app:destination="@id/taskFragment">
-        </action>
-    </fragment>
-
-    <fragment
-        android:id="@+id/editTaskFragment"
-        android:name="com.example.primerproyecto.EditTaskFragment"
-        android:label="fragment_edit_task"
-        tools:layout="@layout/fragment_edit_task" >
-        <action
-            android:id="@+id/action_editTaskFragment_to_taskFragment"
-            app:destination="@id/taskFragment" />
-
-    </fragment>
+    <include app:graph="@navigation/pokemon_graph" />
+    <include app:graph="@navigation/task_graph" />
+    <include app:graph="@navigation/login_graph" />
 
 </navigation>
