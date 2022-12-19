@@ -32,7 +32,5 @@ abstract class TaskDatabase : RoomDatabase() {
                 return INSTANCE as TaskDatabase
             }
         }
-
     }
-
 }

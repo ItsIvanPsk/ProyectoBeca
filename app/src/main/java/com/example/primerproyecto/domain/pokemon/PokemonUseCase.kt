@@ -6,4 +6,5 @@ import javax.inject.Inject
 class PokemonUseCase @Inject constructor(
     private val repository: PokemonRepositoryImpl
 ){
+
 }
