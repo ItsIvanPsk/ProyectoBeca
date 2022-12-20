@@ -49,7 +49,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun setupAdapter(tasks : List<TaskEntity>){
-        var adapter = DataAdapter(this)
+        val adapter = DataAdapter(this)
         val recyclerView: RecyclerView = binding.taskRecycler
         adapter.tasks = tasks
         recyclerView.adapter = adapter

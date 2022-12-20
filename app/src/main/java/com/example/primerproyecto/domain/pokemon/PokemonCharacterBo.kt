@@ -1,6 +1,8 @@
 package com.example.primerproyecto.domain.pokemon
 
+import com.example.primerproyecto.data.pokemon.Result
+
 data class PokemonCharacterBo(
-    val name: String,
-    val url: String
+    val cant : Int,
+    val results: List<Result>
 )

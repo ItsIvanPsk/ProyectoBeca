@@ -24,7 +24,6 @@ class PokemonFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = PokemonMainFragmentBinding.inflate(layoutInflater)
         (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        println(viewmodel.getAllPokemons().count)
     }
 
     override fun onCreateView(
