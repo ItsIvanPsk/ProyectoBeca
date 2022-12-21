@@ -9,41 +9,41 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.PokemonItemBinding
-import com.example.primerproyecto.domain.pokemon.PokemonCharacter
+import com.example.primerproyecto.domain.pokemon.PokemonCharacterBo
 
-object TaskDiffCallBack : DiffUtil.ItemCallback<PokemonCharacter>() {
-    override fun areItemsTheSame(oldItem: PokemonCharacter, newItem: PokemonCharacter): Boolean {
+object TaskDiffCallBack : DiffUtil.ItemCallback<PokemonCharacterBo>() {
+    override fun areItemsTheSame(oldItem: PokemonCharacterBo, newItem: PokemonCharacterBo): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: PokemonCharacter, newItem: PokemonCharacter): Boolean {
+    override fun areContentsTheSame(oldItem: PokemonCharacterBo, newItem: PokemonCharacterBo): Boolean {
         return oldItem == newItem
     }
 }
 
-class DataAdapter(private var fragment : PokemonFragment) : ListAdapter<PokemonCharacter, DataAdapter.MarvelCharactersViewHolder>(
+class DataAdapter(private var fragment : PokemonFragment) : ListAdapter<PokemonCharacterBo, DataAdapter.PokemonCharacterViewHolder>(
     TaskDiffCallBack) {
-    var characters = listOf<PokemonCharacter>()
+    var characters = PokemonCharacterBo(0, emptyList())
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarvelCharactersViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonCharacterViewHolder {
         val binding = PokemonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MarvelCharactersViewHolder(binding, fragment)
+        return PokemonCharacterViewHolder(binding, fragment)
     }
 
-    override fun onBindViewHolder(holder: MarvelCharactersViewHolder, position: Int) {
-        val task: PokemonCharacter = characters[position]
-        holder.bind(task, position, fragment)
+    override fun onBindViewHolder(holder: PokemonCharacterViewHolder, position: Int) {
+        val pokemon: PokemonCharacterBo = characters
+        holder.bind(pokemon, position, fragment)
     }
 
     override fun getItemCount(): Int {
-        return characters.size
+        return characters.results.size
     }
 
-    inner class MarvelCharactersViewHolder(private val binding: PokemonItemBinding, fragment : PokemonFragment) :
+    inner class PokemonCharacterViewHolder(private val binding: PokemonItemBinding, fragment : PokemonFragment) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : PokemonCharacter, position : Int, fragment: PokemonFragment){
-            binding.pokemonName.text = item.name
-            binding.pokemonImage.load(item.url) {
+        fun bind(item : PokemonCharacterBo, position : Int, fragment: PokemonFragment){
+            binding.pokemonName.text = item.results.get(position).name
+            binding.pokemonImage.load(item.results.get(position).url) {
                 crossfade(true)
                 placeholder(R.drawable.ic_baseline_person_24)
                 transformations(CircleCropTransformation())
