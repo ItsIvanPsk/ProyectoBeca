@@ -1,31 +1,56 @@
 package com.example.primerproyecto.presentation.pokemon
 
-import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.primerproyecto.domain.pokemon.PokemonBo
-import com.example.primerproyecto.data.pokemon.PokemonRepositoryImpl
+import androidx.lifecycle.viewModelScope
+import com.example.primerproyecto.data.pokemon.PokemonRepository
 import com.example.primerproyecto.domain.pokemon.GetAllPokemonsUseCase
-import com.example.primerproyecto.domain.pokemon.GetAllPokemonsUseCaseImpl
-import com.example.primerproyecto.domain.pokemon.PokemonCharacterBo
-import com.example.primerproyecto.utils.toBo
+import com.example.primerproyecto.domain.pokemon.GetPokemonUseCase
+import com.example.primerproyecto.domain.pokemon.PokemonBo
+import com.example.primerproyecto.domain.pokemon.PokemonDetailBo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
-    private val repository: PokemonRepositoryImpl
+    private val getAllPokemonsUseCase: GetAllPokemonsUseCase,
+    private val getPokemonUseCase: GetPokemonUseCase
 ) : ViewModel() {
 
-    private var pokemonsResult = MutableLiveData<PokemonCharacterBo>()
-    private val pokemonToDetail = MutableLiveData<PokemonBo>()
+    private var pokemonsResult = MutableLiveData<List<PokemonBo>>()
 
-    fun getAllPokemons() {
-        CoroutineScope(Dispatchers.IO).launch {
-            pokemonsResult.value = repository.getAllCharacters(0).toBo()
+    private var pokemonNameToDetail = MutableLiveData<String>()
+    private var pokemonDetailResult = MutableLiveData<PokemonDetailBo>()
+
+
+    fun getAllPokemons(){
+        viewModelScope.launch {
+            pokemonsResult.value = getAllPokemonsUseCase.getAllPokemons()
         }
     }
+
+    fun getPokemon(name: String){
+        viewModelScope.launch {
+            pokemonDetailResult.value = getPokemonUseCase.getAllPokemons(name)
+        }
+    }
+
+    fun getPokemonDetails() : LiveData<PokemonDetailBo?>{
+        return pokemonDetailResult
+    }
+
+    fun getPokemonList() : LiveData<List<PokemonBo>> {
+        return pokemonsResult
+    }
+
+    fun setPokemonToDetail(url: String){
+        pokemonNameToDetail.value = url
+    }
+
+    fun getPokemonToDetail() : String? {
+        return pokemonNameToDetail.value
+    }
+
 }

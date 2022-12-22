@@ -1,5 +1,9 @@
 package com.example.primerproyecto.data.pokemon
 
+import com.example.primerproyecto.domain.pokemon.GetAllPokemonsUseCase
+import com.example.primerproyecto.domain.pokemon.GetAllPokemonsUseCaseImpl
+import com.example.primerproyecto.domain.pokemon.GetPokemonUseCase
+import com.example.primerproyecto.domain.pokemon.GetPokemonUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +18,6 @@ import javax.inject.Singleton
 @Module
 object RemoteApiModule {
 
-
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit.Builder {
@@ -24,7 +27,7 @@ object RemoteApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(interceptor: AuthInterceptor): OkHttpClient {
+    fun providesOkHttpClient(interceptor: AuthInterceptor): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
@@ -36,8 +39,17 @@ object RemoteApiModule {
 
     @Singleton
     @Provides
-    fun providesPokemonRepository(): PokemonRepository {
-        return PokemonRepositoryImpl(providesPokemonAPI(providesRetrofit()))
-    }
+    fun providesPokemonRepository(api: PokemonAPI)
+        = PokemonRepositoryImpl(api) as PokemonRepository
+
+    @Singleton
+    @Provides
+    fun providesGetAllPokemonUseCase(repository: PokemonRepository)
+        = GetAllPokemonsUseCaseImpl(repository) as GetAllPokemonsUseCase
+
+    @Singleton
+    @Provides
+    fun providesGetPokemonUseCase(repository: PokemonRepository)
+        = GetPokemonUseCaseImpl(repository) as GetPokemonUseCase
 
 }

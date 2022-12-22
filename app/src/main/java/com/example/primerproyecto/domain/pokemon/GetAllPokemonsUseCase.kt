@@ -1,17 +1,17 @@
 package com.example.primerproyecto.domain.pokemon
 
-import androidx.lifecycle.LiveData
-import com.example.primerproyecto.data.pokemon.PokemonDto
 import com.example.primerproyecto.data.pokemon.PokemonRepository
+import com.example.primerproyecto.utils.toBo
 
 interface GetAllPokemonsUseCase {
-    fun getPokemons() : LiveData<List<PokemonDto>>
+    suspend fun getAllPokemons() : List<PokemonBo>
 }
 
 class GetAllPokemonsUseCaseImpl(
     private val pokemonRepository: PokemonRepository
 ) : GetAllPokemonsUseCase {
-    override fun getPokemons(): LiveData<List<PokemonDto>> {
-        TODO("Not yet implemented")
+    override suspend fun getAllPokemons(): List<PokemonBo> {
+        var pokemons = pokemonRepository.getAllCharacters(0)
+        return pokemons
     }
 }

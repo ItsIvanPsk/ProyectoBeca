@@ -1,4 +1,7 @@
 package com.example.primerproyecto.data.pokemon
 
-class PokemonDto {
-}
+data class PokemonDto (
+    var id : Int,
+    var name : String,
+    var url : String
+)

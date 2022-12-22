@@ -13,9 +13,24 @@
         <action
             android:id="@+id/action_pokemonFragment_to_mainMenu2"
             app:destination="@id/mainMenu2" />
+        <action
+            android:id="@+id/action_pokemonFragment_to_pokemonToDetail"
+            app:destination="@id/pokemonToDetail" />
     </fragment>
+
     <fragment
         android:id="@+id/mainMenu2"
         android:name="com.example.primerproyecto.presentation.main_menu.MainMenu"
         android:label="MainMenu" />
+
+    <fragment
+        android:id="@+id/pokemonToDetail"
+        android:name="com.example.primerproyecto.presentation.pokemon.PokemonToDetail"
+        android:label="fragment_pokemon_to_detail"
+        tools:layout="@layout/fragment_pokemon_to_detail" >
+        <action
+            android:id="@+id/action_pokemonToDetail_to_pokemonFragment"
+            app:destination="@id/pokemonFragment" />
+    </fragment>
+
 </navigation>

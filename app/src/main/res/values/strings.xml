@@ -17,4 +17,6 @@
     <string name="go_next">Go next</string>
     <string name="login_task"><![CDATA[Login & Task]]></string>
     <string name="go_pokemon">Go Pokemon</string>
+    <string name="pokemon_image">pokemon_image</string>
+    <string name="pokemon_name">POKEMON_NAME</string>
 </resources>

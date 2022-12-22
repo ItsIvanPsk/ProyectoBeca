@@ -156,7 +156,24 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_pokemonFragment_to_pokemonToDetail">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="pokemonToDetail">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="206" />
+                            <option name="y" value="-311" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

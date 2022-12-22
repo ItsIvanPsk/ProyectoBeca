@@ -1,29 +1,22 @@
 package com.example.primerproyecto.presentation.pokemon
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.primerproyecto.presentation.main_menu.MainActivity
 import com.example.primerproyecto.databinding.PokemonMainFragmentBinding
-import com.example.primerproyecto.domain.pokemon.PokemonCharacterBo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.primerproyecto.presentation.main_menu.MainActivity
 
-class PokemonFragment : Fragment() {
+class PokemonFragment : Fragment(), PokemonListeners{
 
     private lateinit var binding: PokemonMainFragmentBinding
+    private lateinit var adapter: PokemonAdapter
+    private lateinit var recyclerView: RecyclerView
     private val viewmodel: PokemonViewModel by activityViewModels()
-
-    private var characters : PokemonCharacterBo = PokemonCharacterBo(0, emptyList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,20 +29,33 @@ class PokemonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupListeners()
-        setupAdapter(characters)
+        recyclerView = binding.pokemonRecycler
+        setupAdapter()
+        setupObservers()
+        viewmodel.getAllPokemons()
         return binding.root
     }
 
-    private fun setupListeners() = with(binding){
-
+    private fun setupObservers() = with(viewmodel){
+        getPokemonList().observe(viewLifecycleOwner){
+            println(it[0])
+            println(mutableListOf(it))
+            adapter.submitList(it)
+            println(adapter.itemCount)
+        }
     }
 
-    private fun setupAdapter(characters : PokemonCharacterBo){
-        val adapter = DataAdapter(this)
+    private fun setupAdapter(){
+        adapter = PokemonAdapter(this)
         val recyclerView: RecyclerView = binding.pokemonRecycler
-        adapter.characters = characters
+        println(adapter.itemCount)
         recyclerView.adapter = adapter
+    }
+
+    override fun pokemonToDetail(url: String) {
+        viewmodel.setPokemonToDetail(url)
+        val directions = PokemonFragmentDirections.actionPokemonFragmentToPokemonToDetail()
+        findNavController().navigate(directions)
     }
 
 }
