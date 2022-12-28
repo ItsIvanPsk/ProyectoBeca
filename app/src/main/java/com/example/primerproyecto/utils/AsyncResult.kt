@@ -1,7 +1,14 @@
 package com.example.primerproyecto.utils
 
-sealed class AsyncResult<T>(val data:T?=null, val message:String?=null) {
-    class Loading<T>(data: T? = null) : AsyncResult<T>(data)
-    class Success<T>(data: T) : AsyncResult<T>(data)
-    class Error<T>(message: String, data: T?= null) : AsyncResult<T>(data, message)
+sealed class AsyncResult<out T>(open val data: T?) {
+    data class Success<out T>(override val data: T?) : AsyncResult<T>(data)
+    data class Error<out T>(val error: String, override val data: T?) : AsyncResult<T>(data)
+    data class Loading<out T>(override val data: T?) : AsyncResult<T>(data)
+
+    fun isSuccess() = this is Success<T>
+
+    fun isError() = this is Error<T>
+
+    fun isLoading() = this is Loading<T>
+
 }
