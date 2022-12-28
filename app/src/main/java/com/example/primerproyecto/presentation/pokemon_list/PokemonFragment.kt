@@ -1,4 +1,4 @@
-package com.example.primerproyecto.presentation.pokemon
+package com.example.primerproyecto.presentation.pokemon_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,10 +38,17 @@ class PokemonFragment : Fragment(), PokemonListeners{
 
     private fun setupObservers() = with(viewmodel){
         getPokemonList().observe(viewLifecycleOwner){
-            println(it[0])
+            println(it?.get(0))
             println(mutableListOf(it))
             adapter.submitList(it)
             println(adapter.itemCount)
+        }
+        isListLoading().observe(viewLifecycleOwner){
+            if(it) {
+                binding.loading.visibility = View.VISIBLE
+            } else {
+                binding.loading.visibility = View.GONE
+            }
         }
     }
 
@@ -52,9 +59,8 @@ class PokemonFragment : Fragment(), PokemonListeners{
         recyclerView.adapter = adapter
     }
 
-    override fun pokemonToDetail(url: String) {
-        viewmodel.setPokemonToDetail(url)
-        val directions = PokemonFragmentDirections.actionPokemonFragmentToPokemonToDetail()
+    override fun pokemonToDetail(name: String) {
+        val directions = PokemonFragmentDirections.actionPokemonFragmentToPokemonToDetail(name)
         findNavController().navigate(directions)
     }
 

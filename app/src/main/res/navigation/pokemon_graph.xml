@@ -8,14 +8,16 @@
 
     <fragment
         android:id="@+id/pokemonFragment"
-        android:name="com.example.primerproyecto.presentation.pokemon.PokemonFragment"
+        android:name="com.example.primerproyecto.presentation.pokemon_list.PokemonFragment"
         android:label="PokemonFragment" >
         <action
             android:id="@+id/action_pokemonFragment_to_mainMenu2"
             app:destination="@id/mainMenu2" />
         <action
             android:id="@+id/action_pokemonFragment_to_pokemonToDetail"
-            app:destination="@id/pokemonToDetail" />
+            app:destination="@id/pokemonToDetail">
+
+        </action>
     </fragment>
 
     <fragment
@@ -25,12 +27,16 @@
 
     <fragment
         android:id="@+id/pokemonToDetail"
-        android:name="com.example.primerproyecto.presentation.pokemon.PokemonToDetail"
+        android:name="com.example.primerproyecto.presentation.pokemon_detail.PokemonToDetail"
         android:label="fragment_pokemon_to_detail"
         tools:layout="@layout/fragment_pokemon_to_detail" >
         <action
             android:id="@+id/action_pokemonToDetail_to_pokemonFragment"
             app:destination="@id/pokemonFragment" />
+        <argument
+            android:name="name"
+            android:defaultValue="bulbasur"
+            app:argType="string"/>
     </fragment>
 
 </navigation>

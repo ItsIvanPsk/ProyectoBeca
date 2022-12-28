@@ -1,6 +1,6 @@
-package com.example.primerproyecto.domain.pokemon
+package com.example.primerproyecto.domain.pokemon_detail
 
-import com.example.primerproyecto.data.pokemon.Sprites
+import com.example.primerproyecto.data.pokemon_detail.Sprites
 
 data class PokemonDetailBo(
     val id: Int,

@@ -1,4 +1,4 @@
-package com.example.primerproyecto.data.pokemon
+package com.example.primerproyecto.data.pokemon_list
 
 
 data class PokemonCharacterDto(

@@ -1,4 +1,4 @@
-package com.example.primerproyecto.data.pokemon
+package com.example.primerproyecto.data.common
 
 import okhttp3.Interceptor
 import okhttp3.Response

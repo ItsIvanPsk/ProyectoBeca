@@ -1,10 +1,10 @@
 package com.example.primerproyecto.utils
 
-import com.example.primerproyecto.data.pokemon.PokemonCharacterDto
-import com.example.primerproyecto.data.pokemon.PokemonDetailDto
-import com.example.primerproyecto.data.pokemon.PokemonDto
-import com.example.primerproyecto.domain.pokemon.PokemonBo
-import com.example.primerproyecto.domain.pokemon.PokemonDetailBo
+import com.example.primerproyecto.data.pokemon_list.PokemonCharacterDto
+import com.example.primerproyecto.data.pokemon_detail.PokemonDetailDto
+import com.example.primerproyecto.data.pokemon_list.PokemonDto
+import com.example.primerproyecto.domain.pokemon_list.PokemonBo
+import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
 
 fun PokemonCharacterDto.toListBo() = this.results.map {
     it.toBo()

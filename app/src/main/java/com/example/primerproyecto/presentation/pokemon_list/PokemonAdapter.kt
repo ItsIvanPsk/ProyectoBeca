@@ -1,13 +1,12 @@
-package com.example.primerproyecto.presentation.pokemon
+package com.example.primerproyecto.presentation.pokemon_list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.PokemonItemBinding
-import com.example.primerproyecto.domain.pokemon.PokemonBo
+import com.example.primerproyecto.domain.pokemon_list.PokemonBo
 
 class PokemonAdapter(
     private val pokemonListeners: PokemonListeners
@@ -46,5 +45,5 @@ object PokemonDiffCallBack : DiffUtil.ItemCallback<PokemonBo>() {
 }
 
 interface PokemonListeners {
-    fun pokemonToDetail(url : String)
+    fun pokemonToDetail(name : String)
 }

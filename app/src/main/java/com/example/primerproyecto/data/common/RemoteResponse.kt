@@ -22,20 +22,18 @@ abstract class RemoteResponse<ResultType> {
     private var flow: Flow<AsyncResult<ResultType>>? = null
     private var deferredValue: Deferred<AsyncResult<ResultType>>? = null
 
-    //region RepositoryResponse
     private val response = object : RepositoryResponse<ResultType> {
         override suspend fun flow() = executeFlow()
         override suspend fun valueAsync() = executeAsync()
     }
-    //endregion
 
-    //region Logic Template
     fun build(): RepositoryResponse<ResultType> {
         return response
     }
 
     private suspend fun executeFlow(): Flow<AsyncResult<ResultType>> {
         return flow ?: flow {
+            AsyncResult.Loading(null)
             executeBase { emit(it) }
         }.apply { flow = this }
     }
@@ -48,18 +46,16 @@ abstract class RemoteResponse<ResultType> {
         }.apply { deferredValue = this }
     }
 
-    private suspend fun executeBase(emit: suspend (AsyncResult<ResultType>) -> Unit): AsyncResult<ResultType> {
-        emit(AsyncResult.Loading(null))
-        val finalValue: AsyncResult<ResultType>
-        finalValue =
-            try {
+    private suspend fun executeBase(send: suspend (AsyncResult<ResultType>) -> Unit): AsyncResult<ResultType> {
+        val finalValue: AsyncResult<ResultType> = try {
+                AsyncResult.Loading(null)
                 val networkResponse = requestRemoteCall()
-                delay(2000)
+                delay(1000)
                 AsyncResult.Success(networkResponse)
             } catch (e: Exception) {
                 AsyncResult.Error("Ha petau", null)
             }
-        emit(finalValue)
+        send(finalValue)
         return finalValue
     }
 

@@ -1,8 +1,8 @@
-package com.example.primerproyecto.data.pokemon
+package com.example.primerproyecto.data.pokemon_list
 
+import com.example.primerproyecto.data.pokemon_detail.PokemonDetailDto
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface PokemonAPI {
 
