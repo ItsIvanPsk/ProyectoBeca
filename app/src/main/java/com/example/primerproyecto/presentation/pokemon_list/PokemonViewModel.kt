@@ -22,16 +22,13 @@ class PokemonViewModel @Inject constructor(
 
     fun getAllPokemons(){
         viewModelScope.launch {
-
-            getAllPokemonsUseCase.getAllPokemons()
-
             if(getAllPokemonsUseCase.getAllPokemons().isLoading()){
                 pokemonLoading.value = true
                 println("Loading...")
             } else if (getAllPokemonsUseCase.getAllPokemons().isSuccess()){
                 pokemonLoading.value = false
-                println("Success")
                 pokemonsResult.value = getAllPokemonsUseCase.getAllPokemons().data
+                println("Success")
             } else if (getAllPokemonsUseCase.getAllPokemons().isError()){
                 pokemonLoading.value = false
                 println("Error!")
