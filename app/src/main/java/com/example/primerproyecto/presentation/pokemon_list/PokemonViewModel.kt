@@ -1,14 +1,11 @@
 package com.example.primerproyecto.presentation.pokemon_list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCase
-import com.example.primerproyecto.domain.pokemon_list.GetPokemonUseCase
 import com.example.primerproyecto.domain.pokemon_list.PokemonBo
-import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
+import com.example.primerproyecto.utils.AsyncResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,31 +14,20 @@ class PokemonViewModel @Inject constructor(
     private val getAllPokemonsUseCase: GetAllPokemonsUseCase
 ) : ViewModel() {
 
-    private var pokemonsResult = MutableLiveData<List<PokemonBo>?>()
-    private var pokemonLoading = MutableLiveData<Boolean>()
+    private var pokemonsResult = MutableLiveData<AsyncResult<List<PokemonBo>>>()
 
     fun getAllPokemons(){
         viewModelScope.launch {
-            if(getAllPokemonsUseCase.getAllPokemons().isLoading()){
-                pokemonLoading.value = true
-                println("Loading...")
-            } else if (getAllPokemonsUseCase.getAllPokemons().isSuccess()){
-                pokemonLoading.value = false
-                pokemonsResult.value = getAllPokemonsUseCase.getAllPokemons().data
-                println("Success")
-            } else if (getAllPokemonsUseCase.getAllPokemons().isError()){
-                pokemonLoading.value = false
-                println("Error!")
+            getAllPokemonsUseCase.getAllPokemons().collect{
+                pokemonsResult.value = it
             }
+
+            println("pokemonResult(value) = " + pokemonsResult.value)
         }
     }
 
-    fun getPokemonList() : LiveData<List<PokemonBo>?> {
+    fun getPokemonList() : LiveData<AsyncResult<List<PokemonBo>>> {
         return pokemonsResult
-    }
-
-    fun isListLoading(): LiveData<Boolean>{
-        return pokemonLoading
     }
 
 }

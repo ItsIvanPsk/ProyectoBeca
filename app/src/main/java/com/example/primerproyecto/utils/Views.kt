@@ -18,6 +18,6 @@ fun View?.setState(state: Boolean) {
     }
 }
 
-fun View?.isVisible(): Boolean {
+fun View?.isVisible2(): Boolean {
     return this?.visibility == View.VISIBLE
 }

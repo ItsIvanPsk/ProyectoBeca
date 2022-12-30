@@ -1,8 +1,6 @@
-package com.example.primerproyecto.domain.pokemon_list
+package com.example.primerproyecto.domain.pokemon_detail
 
 import com.example.primerproyecto.data.pokemon_detail.PokemonDetailRepository
-import com.example.primerproyecto.data.pokemon_list.PokemonRepository
-import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
 import com.example.primerproyecto.utils.AsyncResult
 
 interface GetPokemonUseCase {

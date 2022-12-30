@@ -50,7 +50,7 @@ abstract class RemoteResponse<ResultType> {
         val finalValue: AsyncResult<ResultType> = try {
                 AsyncResult.Loading(null)
                 val networkResponse = requestRemoteCall()
-                delay(1000)
+                delay(2000)
                 AsyncResult.Success(networkResponse)
             } catch (e: Exception) {
                 AsyncResult.Error("Ha petau", null)

@@ -80,5 +80,7 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
+    // Flow (asLiveData)
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
 }

@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCase
-import com.example.primerproyecto.domain.pokemon_list.GetPokemonUseCase
+import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCase
 import com.example.primerproyecto.domain.pokemon_list.PokemonBo
 import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
 import dagger.hilt.android.lifecycle.HiltViewModel

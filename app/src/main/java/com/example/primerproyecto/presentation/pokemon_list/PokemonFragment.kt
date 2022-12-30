@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.PokemonMainFragmentBinding
+import com.example.primerproyecto.domain.pokemon_list.PokemonBo
 import com.example.primerproyecto.presentation.main_menu.MainActivity
+import com.example.primerproyecto.utils.AsyncResult
+import kotlinx.coroutines.flow.collect
 
 class PokemonFragment : Fragment(), PokemonListeners{
 
@@ -38,17 +43,23 @@ class PokemonFragment : Fragment(), PokemonListeners{
 
     private fun setupObservers() = with(viewmodel){
         getPokemonList().observe(viewLifecycleOwner){
-            println(it?.get(0))
-            println(mutableListOf(it))
-            adapter.submitList(it)
-            println(adapter.itemCount)
-        }
-        isListLoading().observe(viewLifecycleOwner){
-            if(it) {
-                binding.loading.visibility = View.VISIBLE
-            } else {
-                binding.loading.visibility = View.GONE
+            when(it){
+                is AsyncResult.Error -> {
+                    binding.loading.isVisible = false
+                    binding.pokemonRecycler.isVisible = false
+                    Toast.makeText(context, "Error!", Toast.LENGTH_LONG).show()
+                }
+                is AsyncResult.Loading -> {
+                    binding.loading.isVisible = true
+                    binding.pokemonRecycler.isVisible = false
+                }
+                is AsyncResult.Success -> {
+                    binding.loading.isVisible = false
+                    binding.pokemonRecycler.isVisible = true
+                    adapter.submitList(it.data)
+                }
             }
+            println("Data: " + it.data)
         }
     }
 

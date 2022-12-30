@@ -8,8 +8,8 @@ import com.example.primerproyecto.data.pokemon_list.PokemonRepository
 import com.example.primerproyecto.data.pokemon_list.PokemonRepositoryImpl
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCase
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCaseImpl
-import com.example.primerproyecto.domain.pokemon_list.GetPokemonUseCase
-import com.example.primerproyecto.domain.pokemon_list.GetPokemonUseCaseImpl
+import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCase
+import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

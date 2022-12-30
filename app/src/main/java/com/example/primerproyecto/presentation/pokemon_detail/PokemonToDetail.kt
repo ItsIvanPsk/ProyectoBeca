@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -13,6 +15,7 @@ import coil.transform.CircleCropTransformation
 import com.example.primerproyecto.R
 import com.example.primerproyecto.databinding.FragmentPokemonToDetailBinding
 import com.example.primerproyecto.presentation.main_menu.MainActivity
+import com.example.primerproyecto.utils.AsyncResult
 import com.example.primerproyecto.utils.setState
 
 class PokemonToDetail : Fragment() {
@@ -50,16 +53,31 @@ class PokemonToDetail : Fragment() {
                 transformations(CircleCropTransformation())
             }
         }
-        viewmodel.isLoading().observe(viewLifecycleOwner){
-            if(it){
-                setUIState(false)
-                loading.visibility = View.VISIBLE
-            } else {
-                setUIState(true)
-                loading.visibility = View.GONE
+        viewmodel.getPokemonDetails().observe(viewLifecycleOwner){
+            when(it){
+                is AsyncResult.Error -> {
+                    binding.loading.isVisible = false
+                    binding.pokemonRecycler.isVisible = false
+                    Toast.makeText(context, "Error!", Toast.LENGTH_LONG).show()
+                }
+                is AsyncResult.Loading -> {
+                    binding.loading.isVisible = true
+                    binding.pokemonRecycler.isVisible = false
+                }
+                is AsyncResult.Success -> {
+                    binding.loading.isVisible = false
+                    binding.pokemonRecycler.isVisible = true
+                    adapter.submitList(it.data)
+                }
             }
         }
+
     }
+
+    /*
+        setUIState(!it)
+        loading.isVisible = it
+     */
 
     private fun setUIState(state: Boolean) = with(binding){
         pokemonDetailId.setState(state)
