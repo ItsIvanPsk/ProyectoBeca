@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/pokemon_detail_move_background">
+
+    <TextView
+        android:id="@+id/pokemon_detail_move_name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="POKEMON_MOVE_NAME"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/pokemon_detail_move_power"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/pokemon_detail_move_acuracy"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/pokemon_detail_move_pp"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="center"/>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

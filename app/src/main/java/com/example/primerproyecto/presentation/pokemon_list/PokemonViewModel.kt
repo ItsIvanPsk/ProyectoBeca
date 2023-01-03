@@ -18,6 +18,7 @@ class PokemonViewModel @Inject constructor(
     fun getAllPokemons(){
         viewModelScope.launch {
             getAllPokemonsUseCase.getAllPokemons().collect{
+                println(it.data.toString())
                 pokemonsResult.value = it
             }
         }

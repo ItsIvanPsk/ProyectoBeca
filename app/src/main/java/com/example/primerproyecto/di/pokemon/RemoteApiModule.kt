@@ -1,16 +1,13 @@
 package com.example.primerproyecto.di.pokemon
 
 import com.example.primerproyecto.data.common.AuthInterceptor
-import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailRepository
-import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailRepositoryImpl
-import com.example.primerproyecto.data.pokemon_list.Constants
+import com.example.primerproyecto.data.common.Constants
 import com.example.primerproyecto.data.pokemon_list.PokemonAPI
 import com.example.primerproyecto.data.pokemon_list.PokemonRepository
 import com.example.primerproyecto.data.pokemon_list.PokemonRepositoryImpl
+import com.example.primerproyecto.domain.pokemon_detail.*
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCase
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCaseImpl
-import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCase
-import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,5 +59,11 @@ object RemoteApiModule {
     @Provides
     fun providesGetPokemonUseCase(repository: PokemonDetailRepository)
         = GetPokemonUseCaseImpl(repository) as GetPokemonUseCase
+
+    @Singleton
+    @Provides
+    fun providesGetMovesUseCase(repository: PokemonDetailRepository)
+            = GetPokemonMovesUseCaseImpl(repository) as GetPokemonMovesUseCase
+
 
 }

@@ -2,8 +2,8 @@ package com.example.primerproyecto.data.common
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.primerproyecto.data.pokemon_list.Constants.PREFS_TOKEN_FILE
-import com.example.primerproyecto.data.pokemon_list.Constants.USER_TOKEN
+import com.example.primerproyecto.data.common.Constants.PREFS_TOKEN_FILE
+import com.example.primerproyecto.data.common.Constants.USER_TOKEN
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

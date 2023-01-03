@@ -1,4 +1,4 @@
-package com.example.primerproyecto.data.pokemon_list
+package com.example.primerproyecto.data.common
 
 object Constants {
     const val BASE_URL = "https://pokeapi.co/api/v2/"

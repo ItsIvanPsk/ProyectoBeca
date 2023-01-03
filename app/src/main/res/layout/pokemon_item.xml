@@ -7,7 +7,7 @@
     android:layout_height="100dp"
     android:layout_marginVertical="5dp"
     android:orientation="horizontal"
-    android:background="@drawable/_40_2406318_pokemon_text_box_pokmon">
+    android:background="@drawable/gray_edge_corners">
 
     <TextView
         android:id="@+id/pokemon_name"

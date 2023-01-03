@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 interface PokemonDetailRepository {
     suspend fun getCharacter(name : String) : RepositoryResponse<PokemonDetailBo>
+    suspend fun getMove(name: String) : RepositoryResponse<PokemonMovesBo>
 }
 
 class PokemonDetailRepositoryImpl @Inject constructor(
@@ -18,5 +19,11 @@ class PokemonDetailRepositoryImpl @Inject constructor(
     override suspend fun getCharacter(name:String): RepositoryResponse<PokemonDetailBo> {
         return remoteResponse { api.getCharacter(name).toBo() }
     }
+
+    override suspend fun getMove(name: String): RepositoryResponse<PokemonMovesBo> {
+        return remoteResponse { api.getMoves(name).toBo() }
+    }
+
+
 
 }

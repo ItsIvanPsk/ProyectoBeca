@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#8E8E8E</color>
+
+    <color name="pokemon_red">#FF0000</color>
+    <color name="pokemon_light_red">#F08080</color>
+    <color name="pokemon_light_red_2">#DC143C</color>
+    <color name="pokemon_dark_red">#B22222</color>
+
 </resources>
