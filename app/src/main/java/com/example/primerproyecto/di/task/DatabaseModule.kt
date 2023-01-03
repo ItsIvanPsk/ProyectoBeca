@@ -1,7 +1,8 @@
-package com.example.primerproyecto.data.task
+package com.example.primerproyecto.di.task
 
 import android.content.Context
 import androidx.room.Room
+import com.example.primerproyecto.data.task.TaskDatabase
 import com.example.primerproyecto.domain.task.TaskDao
 import dagger.Module
 import dagger.Provides

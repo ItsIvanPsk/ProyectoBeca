@@ -1,7 +1,5 @@
 package com.example.primerproyecto.data.common
 
-import com.example.primerproyecto.utils.AsyncResult
-
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

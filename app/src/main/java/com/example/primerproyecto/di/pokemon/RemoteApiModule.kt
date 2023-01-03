@@ -1,7 +1,8 @@
-package com.example.primerproyecto.data.common
+package com.example.primerproyecto.di.pokemon
 
-import com.example.primerproyecto.data.pokemon_detail.PokemonDetailRepository
-import com.example.primerproyecto.data.pokemon_detail.PokemonDetailRepositoryImpl
+import com.example.primerproyecto.data.common.AuthInterceptor
+import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailRepository
+import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailRepositoryImpl
 import com.example.primerproyecto.data.pokemon_list.Constants
 import com.example.primerproyecto.data.pokemon_list.PokemonAPI
 import com.example.primerproyecto.data.pokemon_list.PokemonRepository

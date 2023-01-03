@@ -26,7 +26,6 @@ class TaskFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentTaskBinding.inflate(layoutInflater)
-        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateView(
@@ -61,7 +60,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun goToTaskAddFragment(){
-        val directions = TaskFragmentDirections.actionTaskFragmentToAddTaskFragment()
+        val directions = TaskFragmentDirections.actionTaskFragmentToMainMenu()
         findNavController().navigate(directions)
     }
 

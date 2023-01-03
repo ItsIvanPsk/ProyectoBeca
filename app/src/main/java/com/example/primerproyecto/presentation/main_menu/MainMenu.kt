@@ -42,7 +42,7 @@ class MainMenu : Fragment() {
         }
     }
 
-    private fun goToLoginFragment(user : String){
+    private fun goToLoginFragment(){
         val directions = MainMenuDirections.actionMainMenuToLoginGraph()
         findNavController().navigate(directions)
     }
@@ -60,7 +60,7 @@ class MainMenu : Fragment() {
     private fun setupObservers(){
         viewmodel.getCheckLiveData().observe(viewLifecycleOwner) {
             if (it) {
-                goToLoginFragment(binding.mainInput.text.toString())
+                goToLoginFragment()
             } else {
                 Toast.makeText(context, "User not found!", Toast.LENGTH_LONG).show()
             }

@@ -25,7 +25,6 @@ class PokemonAdapter(
     inner class PokemonCharacterViewHolder(private val binding: PokemonItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PokemonBo){
-            println(item.name)
             binding.pokemonName.text = item.name
             binding.pokemonBg.setOnClickListener {
                 pokemonListeners.pokemonToDetail(item.name)

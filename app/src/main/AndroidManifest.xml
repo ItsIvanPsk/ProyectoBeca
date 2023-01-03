@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PrimerProyecto"
         tools:targetApi="31"
-        android:name=".presentation.main_menu.FirstProyectApp">
+        android:name=".utils.FirstProyectApp">
         <activity
             android:name=".presentation.main_menu.MainActivity"
             android:exported="true">

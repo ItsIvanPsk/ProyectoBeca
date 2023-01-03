@@ -20,5 +20,7 @@ fun PokemonDetailDto.toBo() = PokemonDetailBo(
     name = name,
     height = height,
     weight = weight,
-    sprites = sprites
+    sprites = sprites,
+    moves = moves,
+    stats = stats
 )

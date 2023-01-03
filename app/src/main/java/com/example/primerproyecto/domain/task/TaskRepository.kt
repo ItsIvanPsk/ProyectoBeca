@@ -1,14 +1,16 @@
 package com.example.primerproyecto.domain.task
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.primerproyecto.utils.TaskEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TaskRepository @Inject constructor(
     private val taskDao: TaskDao
 ) {
 
-    val readAllData : LiveData<List<TaskEntity>> = taskDao.readAllData()
+    val readAllData : Flow<List<TaskEntity>> get() = taskDao.readAllData()
 
     fun addTask(task : TaskEntity){
         taskDao.addTask(task)

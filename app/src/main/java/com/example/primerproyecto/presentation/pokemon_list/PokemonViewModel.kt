@@ -3,9 +3,8 @@ package com.example.primerproyecto.presentation.pokemon_list
 import androidx.lifecycle.*
 import com.example.primerproyecto.domain.pokemon_list.GetAllPokemonsUseCase
 import com.example.primerproyecto.domain.pokemon_list.PokemonBo
-import com.example.primerproyecto.utils.AsyncResult
+import com.example.primerproyecto.data.common.AsyncResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,8 +20,6 @@ class PokemonViewModel @Inject constructor(
             getAllPokemonsUseCase.getAllPokemons().collect{
                 pokemonsResult.value = it
             }
-
-            println("pokemonResult(value) = " + pokemonsResult.value)
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.primerproyecto.domain.task
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.primerproyecto.utils.TaskEntity
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -12,7 +13,7 @@ interface TaskDao {
     fun addTask(task: TaskEntity)
 
     @Query("SELECT * FROM TaskEntity ORDER BY taskId ASC")
-    fun readAllData() : LiveData<List<TaskEntity>>
+    fun readAllData() : Flow<List<TaskEntity>>
 
     @Query("DELETE FROM taskentity WHERE taskId = :taskId")
     fun deleteTask(taskId : Int)

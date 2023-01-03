@@ -1,14 +1,13 @@
 package com.example.primerproyecto.presentation.task
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.primerproyecto.domain.task.TaskRepository
 import com.example.primerproyecto.utils.TaskEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
@@ -27,9 +26,9 @@ class TaskViewModel @Inject constructor(
         taskToEdit.value = task
     }
 
-    fun getTasks(): LiveData<List<TaskEntity>>{
-        return repository.readAllData
-    }
+    fun getTasks(): LiveData<List<TaskEntity>> =
+        repository.readAllData.asLiveData()
+
 
     fun getTaskToEdit() : LiveData<TaskEntity>{
         return taskToEdit

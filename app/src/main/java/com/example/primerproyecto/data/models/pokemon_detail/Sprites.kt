@@ -1,4 +1,4 @@
-package com.example.primerproyecto.data.pokemon_detail
+package com.example.primerproyecto.data.models.pokemon_detail
 
 data class Sprites(
     val back_default: String,

@@ -1,9 +1,8 @@
 package com.example.primerproyecto.domain.pokemon_list
 
 import com.example.primerproyecto.data.pokemon_list.PokemonRepository
-import com.example.primerproyecto.utils.AsyncResult
+import com.example.primerproyecto.data.common.AsyncResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 interface GetAllPokemonsUseCase {
     suspend fun getAllPokemons() : Flow<AsyncResult<List<PokemonBo>>>

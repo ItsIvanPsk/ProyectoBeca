@@ -7,27 +7,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerproyecto.databinding.PokemonMainFragmentBinding
-import com.example.primerproyecto.domain.pokemon_list.PokemonBo
-import com.example.primerproyecto.presentation.main_menu.MainActivity
-import com.example.primerproyecto.utils.AsyncResult
-import kotlinx.coroutines.flow.collect
+import com.example.primerproyecto.data.common.AsyncResult
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PokemonFragment : Fragment(), PokemonListeners{
 
     private lateinit var binding: PokemonMainFragmentBinding
     private lateinit var adapter: PokemonAdapter
     private lateinit var recyclerView: RecyclerView
-    private val viewmodel: PokemonViewModel by activityViewModels()
+    val viewmodel: PokemonViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokemonMainFragmentBinding.inflate(layoutInflater)
-        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     override fun onCreateView(
@@ -59,14 +56,12 @@ class PokemonFragment : Fragment(), PokemonListeners{
                     adapter.submitList(it.data)
                 }
             }
-            println("Data: " + it.data)
         }
     }
 
     private fun setupAdapter(){
         adapter = PokemonAdapter(this)
         val recyclerView: RecyclerView = binding.pokemonRecycler
-        println(adapter.itemCount)
         recyclerView.adapter = adapter
     }
 

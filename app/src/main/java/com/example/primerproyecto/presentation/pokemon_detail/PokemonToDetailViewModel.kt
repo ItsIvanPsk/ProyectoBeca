@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.primerproyecto.domain.pokemon_detail.GetPokemonUseCase
-import com.example.primerproyecto.domain.pokemon_list.PokemonBo
 import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
+import com.example.primerproyecto.data.common.AsyncResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,34 +17,17 @@ class PokemonToDetailViewModel @Inject constructor(
     private val getPokemonUseCase: GetPokemonUseCase
 ) : ViewModel() {
 
-    private var pokemonsResult = MutableLiveData<List<PokemonBo>?>()
-
-    private var pokemonDetailResult = MutableLiveData<PokemonDetailBo?>()
-    private var pokemonLoading = MutableLiveData<Boolean>()
+    private var pokemonDetailResult = MutableLiveData<AsyncResult<PokemonDetailBo?>>()
 
     fun getPokemon(name: String){
         viewModelScope.launch {
-            var state = getPokemonUseCase.getPokemon(name)
-            if(state.isLoading()){
-                pokemonLoading.value = true
-                println("Loading...")
-            } else if (state.isSuccess()){
-                pokemonLoading.value = false
-                println("Success")
-                pokemonDetailResult.value = getPokemonUseCase.getPokemon(name).data
-            } else if (state.isError()){
-                pokemonLoading.value = false
-                println("Error!")
+            getPokemonUseCase.getPokemon(name).collect{
+                pokemonDetailResult.value = it
             }
         }
     }
 
-    fun getPokemonDetails() : LiveData<PokemonDetailBo?> {
+    fun getPokemonDetails() : LiveData<AsyncResult<PokemonDetailBo?>> {
         return pokemonDetailResult
     }
-
-    fun isLoading(): LiveData<Boolean> {
-        return pokemonLoading
-    }
-
 }
