@@ -63,7 +63,7 @@ object RemoteApiModule {
     @Singleton
     @Provides
     fun providesGetMovesUseCase(repository: PokemonDetailRepository)
-            = GetPokemonMovesUseCaseImpl(repository) as GetPokemonMovesUseCase
+            = GetMovesUseCaseImpl(repository) as GetMovesUseCase
 
 
 }

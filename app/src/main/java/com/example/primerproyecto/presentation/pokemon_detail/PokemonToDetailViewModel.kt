@@ -15,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonToDetailViewModel @Inject constructor(
-    private val getPokemonUseCase: GetPokemonUseCase,
-    private val getMovesUseCase: GetMovesUseCase
+    private val getPokemonUseCase: GetPokemonUseCase
 ) : ViewModel() {
 
     private var pokemonDetailResult = MutableLiveData<AsyncResult<PokemonDetailBo?>>()
@@ -30,25 +29,8 @@ class PokemonToDetailViewModel @Inject constructor(
         }
     }
 
-    fun refreshPokemonMoves(moves: List<Move>){
-        viewModelScope.launch {
-
-            for(position in moves){
-                getMovesUseCase.getMovesData(moves.get(
-                    moves.indexOf(position)
-                ).move.name).collect{
-                    pokemonMoves.value?.add(it)
-                }
-            }
-
-        }
-    }
-
     fun getPokemonDetails() : LiveData<AsyncResult<PokemonDetailBo?>> {
         return pokemonDetailResult
     }
 
-    fun getPokemonMoves(): LiveData<MutableList<AsyncResult<PokemonMovesBo?>>>? {
-        return pokemonMoves.value
-    }
 }

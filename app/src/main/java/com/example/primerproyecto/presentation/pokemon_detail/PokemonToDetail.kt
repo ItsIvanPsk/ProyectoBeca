@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -65,32 +66,22 @@ class PokemonToDetail : Fragment() {
                 }
                 is AsyncResult.Success -> {
                     binding.pokemonDetailHeaderLoading.isVisible = false
-                    it.data?.moves?.let { it1 -> viewmodel.refreshPokemonMoves(it1) }
+                    binding.pokemonDetailMovesLoading.isVisible = false
                     setupPokemonData(it.data)
-                }
-            }
-        }
-        viewmodel.getPokemonMoves().observe(viewLifecycleOwner){
-            when(it){
-                is AsyncResult.Error -> {
-                    binding.pokemonDetailImagesLoading.isVisible = false
-                    Toast.makeText(context, "Moves can not be loaded!", Toast.LENGTH_LONG).show()
-                }
-                is AsyncResult.Loading -> {
-                    binding.pokemonDetailImagesLoading.isVisible = true
+                    println(it.data?.moves)
+                    setupPokemonMoves(it.data?.moves)
 
-                }
-                is AsyncResult.Success -> {
-                    binding.pokemonDetailImagesLoading.isVisible = false
                 }
             }
         }
     }
 
-    /*
-        setUIState(!it)
-        loading.isVisible = it
-     */
+    private fun setupPokemonMoves(moves: List<Move>?) {
+        binding.pokemonDetailMoves.isVisible = true
+        binding.pokemonDetailMovesRecycler.layoutManager = LinearLayoutManager(context)
+        print(moves)
+        adapter.submitList(moves)
+    }
 
     private fun setupPokemonData(it: PokemonDetailBo?) = with(binding){
         binding.pokemonDetailHeader.isVisible = true

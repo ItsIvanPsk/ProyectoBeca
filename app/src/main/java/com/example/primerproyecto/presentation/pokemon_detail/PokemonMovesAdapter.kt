@@ -11,7 +11,7 @@ import com.example.primerproyecto.databinding.PokemonItemBinding
 import com.example.primerproyecto.domain.pokemon_detail.PokemonMovesBo
 import com.example.primerproyecto.domain.pokemon_list.PokemonBo
 
-class PokemonMovesAdapter() : ListAdapter<PokemonMovesBo, PokemonMovesAdapter.PokemonMovesCharacterViewHolder>(
+class PokemonMovesAdapter() : ListAdapter<Move, PokemonMovesAdapter.PokemonMovesCharacterViewHolder>(
     PokemonMoveDiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonMovesCharacterViewHolder {
@@ -25,21 +25,18 @@ class PokemonMovesAdapter() : ListAdapter<PokemonMovesBo, PokemonMovesAdapter.Po
 
     inner class PokemonMovesCharacterViewHolder(private val binding: PokemonDetailMoveItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PokemonMovesBo){
-            binding.pokemonDetailMoveName.text = item.name
-            binding.pokemonDetailMovePower.text = item.power.toString()
-            binding.pokemonDetailMoveAcuracy.text = item.accuracy.toString()
-            binding.pokemonDetailMovePp.text = item.pp.toString()
+        fun bind(item: Move){
+            binding.pokemonDetailMoveName.text = item.move.name
         }
     }
 }
 
-object PokemonMoveDiffCallBack : DiffUtil.ItemCallback<PokemonMovesBo>() {
-    override fun areItemsTheSame(oldItem: PokemonMovesBo, newItem: PokemonMovesBo): Boolean {
-        return oldItem.id == newItem.id
+object PokemonMoveDiffCallBack : DiffUtil.ItemCallback<Move>() {
+    override fun areItemsTheSame(oldItem: Move, newItem: Move): Boolean {
+        return oldItem.move.name == newItem.move.name
     }
 
-    override fun areContentsTheSame(oldItem: PokemonMovesBo, newItem: PokemonMovesBo): Boolean {
+    override fun areContentsTheSame(oldItem: Move, newItem: Move): Boolean {
         return false
     }
 }
