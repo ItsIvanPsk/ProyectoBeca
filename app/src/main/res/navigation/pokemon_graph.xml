@@ -26,6 +26,18 @@
         <argument
             android:name="name"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_pokemonToDetail_to_pokemon_camera"
+            app:destination="@id/pokemon_camera" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemon_camera"
+        android:name="com.example.primerproyecto.presentation.pokemon_detail.PokemonCamera"
+        android:label="fragment_pokemon_camera"
+        tools:layout="@layout/fragment_pokemon_camera" >
+        <action
+            android:id="@+id/action_pokemon_camera_to_pokemonToDetail"
+            app:destination="@id/pokemonToDetail" />
     </fragment>
 
     <!--

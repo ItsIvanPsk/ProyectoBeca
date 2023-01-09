@@ -1,5 +1,12 @@
 package com.example.primerproyecto.presentation.pokemon_detail
 
+import android.Manifest
+import android.app.Activity
+import android.app.Application
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.primerproyecto.data.common.AsyncResult
 import com.example.primerproyecto.data.models.pokemon_detail.Move
 import com.example.primerproyecto.domain.pokemon_detail.*
+import com.example.primerproyecto.utils.PokemonConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -19,7 +27,7 @@ class PokemonToDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var pokemonDetailResult = MutableLiveData<AsyncResult<PokemonDetailBo?>>()
-    private var pokemonMoves = MutableLiveData<MutableList<AsyncResult<PokemonMovesBo?>>>()
+    private var permisionsState = MutableLiveData<Boolean>()
 
     fun getPokemon(name: String){
         viewModelScope.launch {
@@ -31,6 +39,15 @@ class PokemonToDetailViewModel @Inject constructor(
 
     fun getPokemonDetails() : LiveData<AsyncResult<PokemonDetailBo?>> {
         return pokemonDetailResult
+    }
+
+    fun checkPermisions(context: Context) {
+        permisionsState.value = (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)
+    }
+
+    fun requestPermisions() : LiveData<Boolean>{
+        return permisionsState
     }
 
 }

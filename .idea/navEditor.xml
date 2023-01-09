@@ -128,18 +128,6 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="mainMenu2">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="345" />
-                            <option name="y" value="43" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="pokemonFragment">
                     <value>
                       <LayoutPositions>
@@ -151,11 +139,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_pokemonFragment_to_mainMenu2">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_pokemonFragment_to_pokemonToDetail">
                               <value>
                                 <LayoutPositions />
@@ -173,6 +156,18 @@
                           <Point>
                             <option name="x" value="206" />
                             <option name="y" value="-311" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="pokemon_camera">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-77" />
+                            <option name="y" value="-441" />
                           </Point>
                         </option>
                       </LayoutPositions>
