@@ -51,6 +51,7 @@ class PokemonToDetail : Fragment() {
 
     private fun setupListeners(){
         binding.pokemonDetailFloatButton.setOnClickListener {
+
             viewmodel.checkPermisions(it.context)
         }
     }

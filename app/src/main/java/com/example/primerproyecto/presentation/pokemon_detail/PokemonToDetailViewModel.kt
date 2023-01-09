@@ -42,8 +42,14 @@ class PokemonToDetailViewModel @Inject constructor(
     }
 
     fun checkPermisions(context: Context) {
-        permisionsState.value = (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)
+        if (checkCameraHardware(context)){
+            permisionsState.value = (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED)
+        }
+    }
+
+    private fun checkCameraHardware(context: Context): Boolean {
+        return context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
     }
 
     fun requestPermisions() : LiveData<Boolean>{

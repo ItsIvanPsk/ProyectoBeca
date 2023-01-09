@@ -2,6 +2,8 @@ package com.example.primerproyecto.presentation.pokemon_detail
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -78,5 +80,7 @@ class PokemonCamera : Fragment() {
 
         }, ContextCompat.getMainExecutor(activity as Activity))
     }
+
+
 
 }
