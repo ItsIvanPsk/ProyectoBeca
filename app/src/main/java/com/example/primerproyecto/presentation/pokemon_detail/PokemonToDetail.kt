@@ -49,6 +49,7 @@ class PokemonToDetail : Fragment() {
         return binding.root
     }
 
+
     private fun setupListeners(){
         binding.pokemonDetailFloatButton.setOnClickListener {
 
