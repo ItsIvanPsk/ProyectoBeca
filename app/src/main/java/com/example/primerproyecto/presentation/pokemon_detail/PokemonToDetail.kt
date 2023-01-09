@@ -1,26 +1,27 @@
 package com.example.primerproyecto.presentation.pokemon_detail
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.CircleCropTransformation
-import com.example.primerproyecto.R
-import com.example.primerproyecto.databinding.FragmentPokemonToDetailBinding
-import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
 import com.example.primerproyecto.data.common.AsyncResult
 import com.example.primerproyecto.data.models.pokemon_detail.Move
-import com.example.primerproyecto.domain.pokemon_detail.PokemonMovesBo
-import com.example.primerproyecto.presentation.pokemon_list.PokemonAdapter
+import com.example.primerproyecto.databinding.FragmentPokemonToDetailBinding
+import com.example.primerproyecto.domain.pokemon_detail.PokemonDetailBo
+import com.example.primerproyecto.presentation.pokemon_list.PokemonFragmentDirections
+import com.example.primerproyecto.utils.PokemonConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,10 +42,19 @@ class PokemonToDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupListeners()
         setupObservers()
         setupMoveAdapter()
         viewmodel.getPokemon(args.name)
         return binding.root
+    }
+
+
+    private fun setupListeners(){
+        binding.pokemonDetailFloatButton.setOnClickListener {
+
+            viewmodel.checkPermisions(it.context)
+        }
     }
 
     private fun setupMoveAdapter(){
@@ -52,6 +62,8 @@ class PokemonToDetail : Fragment() {
         val recyclerView: RecyclerView = binding.pokemonDetailMovesRecycler
         recyclerView.adapter = adapter
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private fun setupObservers() = with(binding){
@@ -74,6 +86,17 @@ class PokemonToDetail : Fragment() {
                 }
             }
         }
+        viewmodel.requestPermisions().observe(viewLifecycleOwner){
+            when (it){
+                true -> goToCameraFragment()
+                false -> ActivityCompat.requestPermissions(activity as Activity, PokemonConstants.REQUIRED_PERMISIONS, PokemonConstants.REQUEST_CODE_PERMISIONS)
+            }
+        }
+    }
+
+    private fun goToCameraFragment() {
+        val directions = PokemonToDetailDirections.actionPokemonToDetailToPokemonCamera()
+        findNavController().navigate(directions)
     }
 
     private fun setupPokemonMoves(moves: List<Move>?) {

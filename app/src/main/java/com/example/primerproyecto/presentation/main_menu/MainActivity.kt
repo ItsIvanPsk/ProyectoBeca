@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,17 +33,18 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
     }
 
-    // Setup the toolbar with navController and the config of the AppBar
-    private fun setupToolbar() {
-        setSupportActionBar(binding.toolbar)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-    }
 
     // Setup NavController with the NavHostFragment
     private fun setupNavController() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHostFragment.navController
+    }
+
+    // Setup the toolbar with navController and the config of the AppBar
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.fragmentContainer))
-                || super.onOptionsItemSelected(item)
+        return item.onNavDestinationSelected(
+            findNavController(R.id.fragmentContainer)
+        ) || super.onOptionsItemSelected(item)
     }
+
 }
